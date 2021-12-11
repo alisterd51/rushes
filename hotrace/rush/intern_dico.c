@@ -6,7 +6,7 @@
 /*   By: anclarma <anclarma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/11 16:02:17 by anclarma          #+#    #+#             */
-/*   Updated: 2021/12/11 16:05:12 by anclarma         ###   ########.fr       */
+/*   Updated: 2021/12/11 17:09:43 by anclarma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,9 @@ static void	intern_add(char **line_adr, t_dico *dico)
 	free(line);
 	*line_adr = NULL;
 	get_next_line(0, line_adr);
+	free(dico->value);
 	dico->value = *line_adr;
+	*line_adr = NULL;
 }
 
 static void	intern_search(char **line_adr, t_dico *dico)
