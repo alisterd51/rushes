@@ -6,7 +6,7 @@
 #    By: anclarma <anclarma@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/10 21:02:42 by anclarma          #+#    #+#              #
-#    Updated: 2021/12/11 15:28:24 by anclarma         ###   ########.fr        #
+#    Updated: 2021/12/11 16:15:03 by anclarma         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,9 @@ NAME		= hotrace
 C_DIR		= .
 O_DIR		= objs
 C_FILES		= main.c					\
-			  get_next_line.c
+			  get_next_line.c			\
+			  intern_dico.c				\
+			  ft.c
 SRCS		= $(patsubst %, $(C_DIR)/%, $(C_FILES))
 O_FILES		= $(C_FILES:.c=.o)
 OBJS		= $(patsubst %, $(O_DIR)/%, $(O_FILES))
