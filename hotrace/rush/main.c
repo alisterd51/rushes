@@ -6,7 +6,7 @@
 /*   By: anclarma <anclarma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 21:08:24 by anclarma          #+#    #+#             */
-/*   Updated: 2021/12/11 14:39:57 by anclarma         ###   ########.fr       */
+/*   Updated: 2021/12/11 15:37:14 by anclarma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,15 @@ void	ft_putendl_stdout(char *s)
 	(void)ret;
 }
 
+void	ft_put_error(char *line)
+{
+	char *tmp;
+
+	tmp = ft_strjoin(line, ": Not found.");
+	ft_putendl_stdout(tmp);
+	free(tmp);
+}
+
 static void recurse_free(t_dico *dico)
 {
 	int	i;
@@ -43,7 +52,7 @@ static void recurse_free(t_dico *dico)
 	free(dico);
 }
 
-static void	intern_dico(int mode, char *line)
+static void	intern_dico(int mode, char **line)
 {
 	static t_dico	dico = {0};
 	t_dico			*dico_ptr;
@@ -55,29 +64,36 @@ static void	intern_dico(int mode, char *line)
 	{
 		dico_ptr = &dico;
 		i = 0;
-		while (line[i])
+		while ((*line)[i])
 		{
-			if ((dico_ptr->next)[(int)line[i]] == NULL)
-				dico_ptr->next[(int)line[i]] = ft_calloc(sizeof(t_dico), 1);
-			dico_ptr = dico_ptr->next[(int)line[i]];
+			if ((dico_ptr->next)[(int)(*line)[i]] == NULL)
+				dico_ptr->next[(int)(*line)[i]] = ft_calloc(sizeof(t_dico), 1);
+			dico_ptr = dico_ptr->next[(int)(*line)[i]];
 			i++;
 		}
-		free(line);
-		get_next_line(0, &line);
-		dico_ptr->value = line;
+		free(*line);
+		*line = NULL;
+		get_next_line(0, line);
+		dico_ptr->value = *line;
 	}
 	else if (mode == 2)
 	{
 		dico_ptr = &dico;
 		i = 0;
-		while (line[i])
+		while ((*line)[i])
 		{
-			if (dico_ptr->next[(int)line[i]] == NULL)
+			if (dico_ptr->next[(int)(*line)[i]] == NULL)
+			{
+				ft_put_error(*line);
+				free(*line);
+				*line = NULL;
 				return ;
-			dico_ptr = dico_ptr->next[(int)line[i]];
+			}
+			dico_ptr = dico_ptr->next[(int)(*line)[i]];
 			i++;
 		}
-		free(line);
+		free(*line);
+		*line = NULL;
 		ft_putendl_stdout(dico_ptr->value);
 	}
 	else
@@ -97,12 +113,12 @@ static void	init_dico(void)
 	intern_dico(0, NULL);
 }
 
-static void	add_dico(char *line)
+static void	add_dico(char **line)
 {
 	intern_dico(1, line);
 }
 
-static void	search_dico(char *line)
+static void	search_dico(char **line)
 {
 	intern_dico(2, line);
 }
@@ -119,10 +135,10 @@ int	main(void)
 	line = NULL;
 	init_dico();
 	while (get_next_line(0, &line) > 0 && *line)
-		add_dico(line);
+		add_dico(&line);
 	free(line);
 	while (get_next_line(0, &line) > 0)
-		search_dico(line);
+		search_dico(&line);
 	free_dico();
 	return (0);
 }

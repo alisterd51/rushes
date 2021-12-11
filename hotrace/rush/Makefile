@@ -6,7 +6,7 @@
 #    By: anclarma <anclarma@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/10 21:02:42 by anclarma          #+#    #+#              #
-#    Updated: 2021/12/11 14:41:12 by anclarma         ###   ########.fr        #
+#    Updated: 2021/12/11 15:28:24 by anclarma         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,9 +21,9 @@ OBJS		= $(patsubst %, $(O_DIR)/%, $(O_FILES))
 CC			= cc
 RM			= rm -f
 MKDIR		= mkdir -p
-CFLAGS		= -Wall -Wextra -Werror		\
+CFLAGS		= -Wall -Wextra -Werror -g3	\
 			  -MMD -MP
-LFLAGS		= -Wall -Wextra -Werror
+LFLAGS		= -Wall -Wextra -Werror -g3
 CINCLUDES	= -I ./includes
 CLIBS		=
 
