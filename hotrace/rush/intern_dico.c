@@ -6,7 +6,7 @@
 /*   By: anclarma <anclarma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/11 16:02:17 by anclarma          #+#    #+#             */
-/*   Updated: 2021/12/11 17:09:43 by anclarma         ###   ########.fr       */
+/*   Updated: 2021/12/11 18:27:19 by anclarma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,18 +31,20 @@ static void	recurse_free(t_dico *dico)
 
 static void	intern_add(char **line_adr, t_dico *dico)
 {
-	size_t	i;
-	char	*line;
+	size_t			i;
+	char			*line;
+	unsigned char	c;
 
 	i = 0;
 	line = *line_adr;
 	while (line[i])
 	{
-		if ((dico->next)[(int)(line)[i]] == NULL)
-			dico->next[(int)(line)[i]] = ft_calloc(sizeof(t_dico), 1);
-		if (dico->next[(int)(line)[i]] == NULL)
+		c = line[i];
+		if ((dico->next)[c] == NULL)
+			dico->next[c] = ft_calloc(sizeof(t_dico), 1);
+		if (dico->next[c] == NULL)
 			return ;
-		dico = dico->next[(int)(line)[i]];
+		dico = dico->next[c];
 		i++;
 	}
 	free(line);
@@ -55,21 +57,23 @@ static void	intern_add(char **line_adr, t_dico *dico)
 
 static void	intern_search(char **line_adr, t_dico *dico)
 {
-	size_t	i;
-	char	*line;
+	size_t			i;
+	char			*line;
+	unsigned char	c;
 
 	i = 0;
 	line = *line_adr;
 	while (line[i])
 	{
-		if (dico->next[(int)(line)[i]] == NULL)
+		c = line[i];
+		if (dico->next[c] == NULL)
 		{
 			ft_put_error(line);
 			free(line);
 			line_adr = NULL;
 			return ;
 		}
-		dico = dico->next[(int)(line)[i]];
+		dico = dico->next[c];
 		i++;
 	}
 	free(line);
