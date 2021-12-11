@@ -6,7 +6,7 @@
 /*   By: anclarma <anclarma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 21:18:51 by anclarma          #+#    #+#             */
-/*   Updated: 2021/12/11 16:17:23 by anclarma         ###   ########.fr       */
+/*   Updated: 2021/12/11 17:28:27 by anclarma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,11 +67,13 @@ void	*ft_calloc(size_t count, size_t size)
 
 int	get_next_line(int fd, char **line)
 {
-	ssize_t	ret;
-	char	*str;
-	char	*tmp;
-	char	buf[2];
+	static ssize_t	ret = 1;
+	char			*str;
+	char			*tmp;
+	char			buf[2];
 
+	if (ret == 0)
+		return (0);
 	ret = read(fd, buf, 1);
 	buf[1] = '\0';
 	if (ret <= 0)
@@ -91,47 +93,3 @@ int	get_next_line(int fd, char **line)
 	*line = str;
 	return (1);
 }
-
-/*
-int	get_next_line(int fd, char **line)
-{
-	static char *buf = NULL;
-	char		*tmp;
-	size_t		len;
-	int			eof;
-	char	buffer[BUFFER_SIZE + 1];
-	char	*swap;
-
-	eof = 1;
-	while (!ft_strchr(buf, '\n') && eof > 0)
-	{
-
-		ft_bzero(buffer, BUFFER_SIZE + 1);
-		eof = read(fd, buffer, BUFFER_SIZE);
-		if (!buf)
-			buf = ft_strdup("");
-		swap = buf;
-		buf = ft_strjoin(swap, buffer);
-		free(swap);
-	}
-	if (eof >= 0)
-	{
-		if (eof == 0)
-			len = ft_strchr(buf, '\0') - buf;
-		else
-			len = ft_strchr(buf, '\n') - buf;
-		*line = malloc(sizeof(char) * (len + 1));
-		if (!*line)
-			return (-1);
-		ft_memcpy(*line, buf, len);
-		(*line)[len] = '\0';
-		if (eof == 0)
-			tmp = NULL;
-		else
-			tmp = ft_strdup(ft_strchr(buf, '\n') + 1);
-		free(buf);
-		buf = tmp;
-	}
-	return (eof);
-}
-*/
