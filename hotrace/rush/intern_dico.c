@@ -6,7 +6,7 @@
 /*   By: anclarma <anclarma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/11 16:02:17 by anclarma          #+#    #+#             */
-/*   Updated: 2021/12/11 18:27:19 by anclarma         ###   ########.fr       */
+/*   Updated: 2021/12/11 18:36:10 by anclarma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static void	recurse_free(t_dico *dico)
 	i = 0;
 	if (dico == NULL)
 		return ;
-	while (i < 128)
+	while (i < 256)
 	{
 		recurse_free(dico->next[i]);
 		i++;
@@ -95,7 +95,7 @@ void	intern_dico(int mode, char **line)
 	else
 	{
 		i = 0;
-		while (i < 128)
+		while (i < 256)
 		{
 			recurse_free(dico.next[i]);
 			i++;
