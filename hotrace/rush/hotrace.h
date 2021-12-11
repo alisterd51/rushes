@@ -6,7 +6,7 @@
 /*   By: anclarma <anclarma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 21:45:11 by anclarma          #+#    #+#             */
-/*   Updated: 2021/12/11 16:18:35 by anclarma         ###   ########.fr       */
+/*   Updated: 2021/12/11 17:52:11 by anclarma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,13 @@
 # include <stddef.h>
 
 /*
-**
+** struct
 */
 typedef struct s_dico	t_dico;
 struct	s_dico
 {
 	char	*value;
-	t_dico	*next[128];
+	t_dico	*next[256];
 };
 
 /*
