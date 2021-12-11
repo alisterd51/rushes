@@ -6,7 +6,7 @@
 #    By: anclarma <anclarma@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/10 21:02:42 by anclarma          #+#    #+#              #
-#    Updated: 2021/12/11 17:52:31 by anclarma         ###   ########.fr        #
+#    Updated: 2021/12/11 18:05:44 by anclarma         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,7 @@ MKDIR		= mkdir -p
 CFLAGS		= -Wall -Wextra -Werror		\
 			  -MMD -MP
 LFLAGS		= -Wall -Wextra -Werror
-CINCLUDES	= -I ./includes
+CINCLUDES	=
 CLIBS		=
 
 all:		$(NAME)
