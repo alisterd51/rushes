@@ -6,7 +6,7 @@
 /*   By: anclarma <anclarma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/11 16:11:26 by anclarma          #+#    #+#             */
-/*   Updated: 2021/12/11 16:14:27 by anclarma         ###   ########.fr       */
+/*   Updated: 2021/12/12 14:45:31 by anclarma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,9 +80,8 @@ void	ft_putendl_stdout(char *s)
 
 	if (!s)
 		return ;
-	ret = ft_strlen(s);
-	s[ret] = '\n';
-	ret = write(1, s, ret + 1);
+	ret = write(1, s, ft_strlen(s));
+	ret = write(1, "\n", 1);
 	(void)ret;
 }
 
