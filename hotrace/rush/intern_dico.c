@@ -6,7 +6,7 @@
 /*   By: anclarma <anclarma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/11 16:02:17 by anclarma          #+#    #+#             */
-/*   Updated: 2021/12/12 16:27:25 by anclarma         ###   ########.fr       */
+/*   Updated: 2021/12/18 22:56:50 by anclarma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,10 @@ static void	intern_add(char **line_adr, t_dico *dico)
 	{
 		c = line[i];
 		if ((dico->next)[c] == NULL)
-			dico->next[c] = ft_calloc(sizeof(t_dico), 1);
+			dico->next[c] = (t_dico *)malloc(sizeof(t_dico));
 		if (dico->next[c] == NULL)
 			return ;
+		*(dico->next[c]) = (t_dico){0};
 		dico = dico->next[c];
 		i++;
 	}
