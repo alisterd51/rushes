@@ -6,7 +6,7 @@
 /*   By: anclarma <anclarma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/08 11:26:08 by anclarma          #+#    #+#             */
-/*   Updated: 2022/01/08 15:23:49 by anclarma         ###   ########.fr       */
+/*   Updated: 2022/01/08 16:42:26 by anclarma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,12 +23,14 @@ static void	print_test(char *name)
 	ft_putstr_fd(" : ", 1);
 }
 
+#include <stdio.h>
+
 static void	print_result(int status)
 {
-	if (status == 0)
+	if (WIFEXITED(status) && status == 0)
 		ft_putendl_fd("[OK]", 1);
-	else if (0)
-		ft_putendl_fd("[SIGSEGV]", 1);
+	else if (WIFSIGNALED(status))
+		ft_putendl_fd("[SEGV]", 1);
 	else if (0)
 		ft_putendl_fd("[SIGBUS]", 1);
 	else

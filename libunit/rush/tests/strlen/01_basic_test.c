@@ -6,11 +6,16 @@
 /*   By: anclarma <anclarma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/08 10:34:53 by anclarma          #+#    #+#             */
-/*   Updated: 2022/01/08 14:48:11 by anclarma         ###   ########.fr       */
+/*   Updated: 2022/01/08 16:06:56 by anclarma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "libft.h"
+
 int	basic_test(void)
 {
-	return (0);
+	if (ft_strlen("abc") == 3)
+		return (0);
+	else
+		return (-1);
 }

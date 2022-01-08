@@ -1,26 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   00_launcher.c                                      :+:      :+:    :+:   */
+/*   03_bigger_str_test.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anclarma <anclarma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/08 10:33:21 by anclarma          #+#    #+#             */
-/*   Updated: 2022/01/08 16:18:39 by anclarma         ###   ########.fr       */
+/*   Created: 2022/01/08 10:34:53 by anclarma          #+#    #+#             */
+/*   Updated: 2022/01/08 16:41:39 by anclarma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stddef.h>
-#include "libunit.h"
-#include "strlen_test.h"
+#include "libft.h"
 
-int strlen_launcher(void)
+#include <stdlib.h>
+
+int	bigger_str_test(void)
 {
-	t_unit_test	*testlist;
+	char	*str;
 
-	testlist = NULL;
-	load_test(&testlist, "STRLEN: Basic test", &basic_test);
-	load_test(&testlist, "STRLEN: NULL test", &null_test);
-	load_test(&testlist, "STRLEN: Bigger string test", &bigger_str_test);
-	return (launch_tests(&testlist));
+	str = malloc(1000001);
+	if (str == NULL)
+		return (-1);
+	ft_memset(str, 'a', 1000000);
+	str[1000000] = '\0';
+	if (ft_strlen(str) == 1000000)
+		return (0);
+	else
+		return (-1);
+
 }

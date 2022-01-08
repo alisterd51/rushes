@@ -1,26 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   00_launcher.c                                      :+:      :+:    :+:   */
+/*   02_null_test.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anclarma <anclarma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/08 10:33:21 by anclarma          #+#    #+#             */
-/*   Updated: 2022/01/08 16:18:39 by anclarma         ###   ########.fr       */
+/*   Created: 2022/01/08 10:34:53 by anclarma          #+#    #+#             */
+/*   Updated: 2022/01/08 16:12:56 by anclarma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stddef.h>
-#include "libunit.h"
-#include "strlen_test.h"
+#include <string.h>
 
-int strlen_launcher(void)
+int	null_test(void)
 {
-	t_unit_test	*testlist;
+	char	*str = NULL;
 
-	testlist = NULL;
-	load_test(&testlist, "STRLEN: Basic test", &basic_test);
-	load_test(&testlist, "STRLEN: NULL test", &null_test);
-	load_test(&testlist, "STRLEN: Bigger string test", &bigger_str_test);
-	return (launch_tests(&testlist));
+	if (strlen(str) == 0)
+		return (0);
+	else
+		return (-1);
 }

@@ -6,7 +6,7 @@
 #    By: anclarma <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/01 19:28:48 by anclarma          #+#    #+#              #
-#    Updated: 2022/01/08 15:01:07 by anclarma         ###   ########.fr        #
+#    Updated: 2022/01/08 16:29:41 by anclarma         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,9 @@ C_DIR		= .
 O_DIR		= objs
 C_FILES		= tests/main.c					\
 			  tests/strlen/00_launcher.c	\
-			  tests/strlen/01_basic_test.c
+			  tests/strlen/01_basic_test.c	\
+			  tests/strlen/02_null_test.c	\
+			  tests/strlen/03_bigger_str_test.c
 SRCS		= $(patsubst %, $(C_DIR)/%, $(C_FILES))
 O_FILES		= $(C_FILES:.c=.o)
 OBJS		= $(patsubst %, $(O_DIR)/%, $(O_FILES))
@@ -28,7 +30,7 @@ LFLAGS		= -Wall -Wextra -Werror
 CINCLUDES	= -Itests/includes			\
 			  -Ilibft/includes			\
 			  -Iframework/includes
-CLIBS		= -Lframework -Llibft -lunit -lft
+CLIBS		= -Lframework -Llibft -lunit -lft -lrt
 
 all:		$(NAME)
 
