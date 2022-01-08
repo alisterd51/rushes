@@ -6,7 +6,7 @@
 /*   By: anclarma <anclarma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/08 11:26:08 by anclarma          #+#    #+#             */
-/*   Updated: 2022/01/08 13:34:23 by anclarma         ###   ########.fr       */
+/*   Updated: 2022/01/08 13:56:15 by anclarma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,11 +16,27 @@
 #include <unistd.h>
 #include "libunit.h"
 
+static void	print_test(char *name)
+{
+
+}
+
+static void	print_result(int status)
+{
+	if (status == 0)
+		ft_putendl_fd("[OK]", 1);
+	else if (0)
+		;
+	else
+		ft_putendl_fd("[KO]", 1);
+}
+
 static int	exec_test(t_unit_test *test)
 {
 	pid_t	pid;
 	int		status;
 
+	print_test(test->name);
 	pid = fork();
 	if (pid == 0)
 	{
@@ -30,7 +46,11 @@ static int	exec_test(t_unit_test *test)
 	{
 		wait(&status);
 	}
-	return (0);
+	print_result(status);
+	if (status == 0)
+		return (0);
+	else
+		return (-1);
 }
 
 int	launch_tests(t_unit_test **list)
