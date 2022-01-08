@@ -6,7 +6,7 @@
 /*   By: anclarma <anclarma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/08 12:25:18 by anclarma          #+#    #+#             */
-/*   Updated: 2022/01/08 15:09:18 by anclarma         ###   ########.fr       */
+/*   Updated: 2022/01/08 18:28:56 by anclarma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,4 +26,3 @@ int		launch_tests(t_unit_test **list);
 void	clean_tests(t_unit_test **list);
 
 #endif
-

@@ -6,7 +6,7 @@
 /*   By: anclarma <anclarma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/08 10:33:21 by anclarma          #+#    #+#             */
-/*   Updated: 2022/01/08 16:18:39 by anclarma         ###   ########.fr       */
+/*   Updated: 2022/01/08 18:31:05 by anclarma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 #include "libunit.h"
 #include "strlen_test.h"
 
-int strlen_launcher(void)
+int	strlen_launcher(void)
 {
 	t_unit_test	*testlist;
 
