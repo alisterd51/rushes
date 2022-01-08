@@ -1,27 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   strlen_test.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anclarma <anclarma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/08 10:32:40 by anclarma          #+#    #+#             */
-/*   Updated: 2022/01/08 14:24:32 by anclarma         ###   ########.fr       */
+/*   Created: 2022/01/08 14:21:27 by anclarma          #+#    #+#             */
+/*   Updated: 2022/01/08 14:29:32 by anclarma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "strlen_test.h"
+#ifndef STRLEN_TEST_H
+# define STRLEN_TEST_H
 
-int	main(int ac, char **av)
-{
-	int	ret;
+/*
+** 00_launcher.c
+*/
+int	strlen_launcher(void);
 
-	(void)ac;
-	(void)av;
-	ret = 0;
-	ret += strlen_launcher();
-	if (ret == 0)
-		return (0);
-	else
-		return (-1);
-}
+int	basic_test(void);
+int	null_test(void);
+int	bigger_str_test(void);
+
+#endif

@@ -6,7 +6,7 @@
 /*   By: anclarma <anclarma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/08 11:26:08 by anclarma          #+#    #+#             */
-/*   Updated: 2022/01/08 13:56:15 by anclarma         ###   ########.fr       */
+/*   Updated: 2022/01/08 14:17:56 by anclarma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,13 @@
 #include <sys/wait.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include "libft.h"
 #include "libunit.h"
 
 static void	print_test(char *name)
 {
-
+	ft_putstr_fd(name, 1);
+	ft_putstr_fd(" : ", 1);
 }
 
 static void	print_result(int status)
@@ -26,7 +28,9 @@ static void	print_result(int status)
 	if (status == 0)
 		ft_putendl_fd("[OK]", 1);
 	else if (0)
-		;
+		ft_putendl_fd("[SIGSEGV]", 1);
+	else if (0)
+		ft_putendl_fd("[SIGBUS]", 1);
 	else
 		ft_putendl_fd("[KO]", 1);
 }
