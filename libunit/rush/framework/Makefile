@@ -6,7 +6,7 @@
 #    By: anclarma <anclarma@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/10 21:02:42 by anclarma          #+#    #+#              #
-#    Updated: 2022/01/08 15:13:33 by anclarma         ###   ########.fr        #
+#    Updated: 2022/01/08 18:56:52 by anclarma         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,8 @@ C_DIR		= srcs
 O_DIR		= objs
 C_FILES		= load_test.c			\
 			  launch_tests.c		\
-			  clean_tests.c
+			  clean_tests.c			\
+			  count_test.c
 SRCS		= $(patsubst %, $(C_DIR)/%, $(C_FILES))
 O_FILES		= $(C_FILES:.c=.o)
 OBJS		= $(patsubst %, $(O_DIR)/%, $(O_FILES))

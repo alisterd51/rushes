@@ -1,29 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   libunit.h                                          :+:      :+:    :+:   */
+/*   count_test.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anclarma <anclarma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/08 12:25:18 by anclarma          #+#    #+#             */
-/*   Updated: 2022/01/08 18:45:11 by anclarma         ###   ########.fr       */
+/*   Created: 2022/01/08 18:46:31 by anclarma          #+#    #+#             */
+/*   Updated: 2022/01/08 19:01:25 by anclarma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LIBUNIT_H
-# define LIBUNIT_H
+#include "libft.h"
 
-typedef struct s_unit_test	t_unit_test;
-struct	s_unit_test
+static void	counter(int mode, int status)
 {
-	char		*name;
-	int			(*fonction)(void);
-	t_unit_test	*next;
-};
+	static int	count = 0;
+	static int	valid = 0;
 
-void	load_test(t_unit_test **list, char *name, int (*fonction)(void));
-int		launch_tests(t_unit_test **list);
-void	clean_tests(t_unit_test **list);
-void	print_counter(void);
-void	add_to_counter(int status);
-#endif
+	if (mode == 0)
+	{
+		count++;
+		if (status == 0)
+			valid++;
+	}
+	else
+	{
+		ft_putnbr_fd(valid, 1);
+		ft_putchar_fd('/', 1);
+		ft_putnbr_fd(count, 1);
+		ft_putendl_fd(" tests checked", 1);
+	}
+}
+
+void	print_counter(void)
+{
+	counter(1, 0);
+}
+
+void	add_to_counter(int status)
+{
+	counter(0, status);
+}

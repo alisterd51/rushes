@@ -6,7 +6,7 @@
 /*   By: anclarma <anclarma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/08 11:26:08 by anclarma          #+#    #+#             */
-/*   Updated: 2022/01/08 18:34:15 by anclarma         ###   ########.fr       */
+/*   Updated: 2022/01/08 18:59:40 by anclarma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ static int	exec_test(t_unit_test **list, t_unit_test *test)
 		wait(&status);
 	}
 	print_result(status);
+	add_to_counter(status);
 	if (status == 0)
 		return (0);
 	else
