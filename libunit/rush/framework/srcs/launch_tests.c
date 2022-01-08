@@ -6,7 +6,7 @@
 /*   By: anclarma <anclarma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/08 11:26:08 by anclarma          #+#    #+#             */
-/*   Updated: 2022/01/08 14:17:56 by anclarma         ###   ########.fr       */
+/*   Updated: 2022/01/08 15:23:49 by anclarma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ static void	print_result(int status)
 		ft_putendl_fd("[KO]", 1);
 }
 
-static int	exec_test(t_unit_test *test)
+static int	exec_test(t_unit_test **list, t_unit_test *test)
 {
 	pid_t	pid;
 	int		status;
@@ -44,7 +44,9 @@ static int	exec_test(t_unit_test *test)
 	pid = fork();
 	if (pid == 0)
 	{
-		exit(test->fonction());
+		status = test->fonction();
+		clean_tests(list);
+		exit(status);
 	}
 	else
 	{
@@ -66,9 +68,10 @@ int	launch_tests(t_unit_test **list)
 	test = *list;
 	while (test)
 	{
-		ret += exec_test(test);
+		ret += exec_test(list, test);
 		test = test->next;
 	}
+	clean_tests(list);
 	if (ret == 0)
 		return (0);
 	else

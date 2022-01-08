@@ -1,26 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   00_launcher.c                                      :+:      :+:    :+:   */
+/*   clean_tests.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anclarma <anclarma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/08 10:33:21 by anclarma          #+#    #+#             */
-/*   Updated: 2022/01/08 15:24:21 by anclarma         ###   ########.fr       */
+/*   Created: 2022/01/08 15:09:56 by anclarma          #+#    #+#             */
+/*   Updated: 2022/01/08 15:13:46 by anclarma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stddef.h>
+#include <stdlib.h>
 #include "libunit.h"
-#include "strlen_test.h"
 
-int strlen_launcher(void)
+void	clean_tests(t_unit_test **list)
 {
-	t_unit_test	*testlist;
+	t_unit_test	*element;
+	t_unit_test	*current;
 
-	testlist = NULL;
-	load_test(&testlist, "Basic test", &basic_test);
-	//load_test(&testlist, "NULL test", &null_test);
-	//load_test(&testlist, "Bigger string test", &bigger_str_test);
-	return (launch_tests(&testlist));
+	current = *list;
+	while (current)
+	{
+		element = current;
+		current = current->next;
+		free(element);
+	}
+	*list = NULL;
 }
