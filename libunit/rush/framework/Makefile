@@ -6,7 +6,7 @@
 #    By: anclarma <anclarma@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/10 21:02:42 by anclarma          #+#    #+#              #
-#    Updated: 2022/01/08 11:25:11 by anclarma         ###   ########.fr        #
+#    Updated: 2022/01/08 12:36:26 by anclarma         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,12 +19,14 @@ SRCS		= $(patsubst %, $(C_DIR)/%, $(C_FILES))
 O_FILES		= $(C_FILES:.c=.o)
 OBJS		= $(patsubst %, $(O_DIR)/%, $(O_FILES))
 CC			= cc
+AR			= ar rc
 RM			= rm -f
 MKDIR		= mkdir -p
 CFLAGS		= -Wall -Wextra -Werror	\
 			  -MMD -MP
 LFLAGS		= -Wall -Wextra -Werror
-CINCLUDES	= -Iincludes
+CINCLUDES	= -Iincludes			\
+			  -I../libft/includes
 CLIBS		=
 
 all:		$(NAME)
@@ -37,8 +39,8 @@ $(O_DIR)/%.o: $(C_DIR)/%.c
 $(O_DIR):
 			$(MKDIR) $(O_DIR)
 
-$(NAME):	$(LIBFT) $(O_DIR) $(OBJS)
-			$(AR) $@ $(OBJS) $(LIBFT)
+$(NAME):	$(O_DIR) $(OBJS)
+			$(AR) $@ $(OBJS)
 
 clean:
 			$(RM) -r $(O_DIR)
