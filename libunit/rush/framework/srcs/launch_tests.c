@@ -6,7 +6,7 @@
 /*   By: anclarma <anclarma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/08 11:26:08 by anclarma          #+#    #+#             */
-/*   Updated: 2022/01/08 16:42:26 by anclarma         ###   ########.fr       */
+/*   Updated: 2022/01/08 18:21:30 by anclarma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,18 +23,24 @@ static void	print_test(char *name)
 	ft_putstr_fd(" : ", 1);
 }
 
-#include <stdio.h>
-
 static void	print_result(int status)
 {
 	if (WIFEXITED(status) && status == 0)
 		ft_putendl_fd("[OK]", 1);
-	else if (WIFSIGNALED(status))
-		ft_putendl_fd("[SEGV]", 1);
-	else if (0)
-		ft_putendl_fd("[SIGBUS]", 1);
-	else
+	else if (WIFEXITED(status) && status)
 		ft_putendl_fd("[KO]", 1);
+	else if (status & SIGSEGV)
+		ft_putendl_fd("[SEGV]", 1);
+	else if (status & SIGBUS)
+		ft_putendl_fd("[SIGBUS]", 1);
+	else if (status & SIGABRT)
+		ft_putendl_fd("[SIGABRT]", 1);
+	else if (status & SIGFPE)
+		ft_putendl_fd("[SIGFPE]", 1);
+	else if (status & SIGPIPE)
+		ft_putendl_fd("[SIGPIPE]", 1);
+	else if (status & SIGILL)
+		ft_putendl_fd("[SIGILL]", 1);
 }
 
 static int	exec_test(t_unit_test **list, t_unit_test *test)
