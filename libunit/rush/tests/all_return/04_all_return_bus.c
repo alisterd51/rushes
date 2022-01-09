@@ -1,30 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   04_all_return_bus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anclarma <anclarma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/08 10:32:40 by anclarma          #+#    #+#             */
-/*   Updated: 2022/01/09 11:21:28 by anclarma         ###   ########.fr       */
+/*   Created: 2022/01/08 10:34:53 by anclarma          #+#    #+#             */
+/*   Updated: 2022/01/09 11:40:08 by anclarma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "strlen_test.h"
-#include "all_return_test.h"
-#include "libunit.h"
+#include "libft.h"
 
-int	main(int ac, char **av)
+/*
+** manque un sigbus
+*/
+int	all_return_bus(void)
 {
-	int	ret;
-
-	(void)ac;
-	(void)av;
-	ret = 0;
-	ret += strlen_launcher();
-	ret += all_return_launcher();
-	print_counter();
-	if (ret == 0)
+	if (ft_strlen("a") == 1)
 		return (0);
 	else
 		return (-1);

@@ -6,7 +6,7 @@
 /*   By: anclarma <anclarma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/08 18:46:31 by anclarma          #+#    #+#             */
-/*   Updated: 2022/01/08 19:01:25 by anclarma         ###   ########.fr       */
+/*   Updated: 2022/01/09 11:46:06 by anclarma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ static void	counter(int mode, int status)
 	}
 	else
 	{
+		ft_putchar_fd('\n', 1);
 		ft_putnbr_fd(valid, 1);
 		ft_putchar_fd('/', 1);
 		ft_putnbr_fd(count, 1);

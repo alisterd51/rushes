@@ -1,30 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   03_all_return_segv.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anclarma <anclarma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/08 10:32:40 by anclarma          #+#    #+#             */
-/*   Updated: 2022/01/09 11:21:28 by anclarma         ###   ########.fr       */
+/*   Created: 2022/01/08 10:34:53 by anclarma          #+#    #+#             */
+/*   Updated: 2022/01/09 11:40:32 by anclarma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "strlen_test.h"
-#include "all_return_test.h"
-#include "libunit.h"
+#include "libft.h"
 
-int	main(int ac, char **av)
+int	all_return_segv(void)
 {
-	int	ret;
+	char	*str;
 
-	(void)ac;
-	(void)av;
-	ret = 0;
-	ret += strlen_launcher();
-	ret += all_return_launcher();
-	print_counter();
-	if (ret == 0)
+	str = (char *)0x1;
+	if (ft_strlen(str) == 0)
 		return (0);
 	else
 		return (-1);
