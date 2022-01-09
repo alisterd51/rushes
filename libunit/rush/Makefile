@@ -6,7 +6,7 @@
 #    By: anclarma <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/01 19:28:48 by anclarma          #+#    #+#              #
-#    Updated: 2022/01/09 16:31:39 by anclarma         ###   ########.fr        #
+#    Updated: 2022/01/09 16:54:20 by anclarma         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,7 +26,9 @@ C_FILES1	= main.c						\
 			  all_return/03_segv.c			\
 			  all_return/04_bus.c			\
 			  all_return/05_abort.c			\
-			  all_return/06_fpe.c
+			  all_return/06_fpe.c			\
+			  all_return/07_pipe.c			\
+			  all_return/08_ill.c
 SRCS1		= $(addprefix $(C_DIR1)/, $(C_FILES1))
 OBJS1		= $(SRCS1:.c=.o)
 DEPS1		= $(SRCS1:.c=.d)

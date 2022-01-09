@@ -6,7 +6,7 @@
 /*   By: anclarma <anclarma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/08 10:33:21 by anclarma          #+#    #+#             */
-/*   Updated: 2022/01/09 16:31:10 by anclarma         ###   ########.fr       */
+/*   Updated: 2022/01/09 16:53:09 by anclarma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,5 +25,7 @@ int	all_return_launcher(void)
 	load_test(&testlist, "ALL: sigbus test", &all_return_bus);
 	load_test(&testlist, "ALL: abort test", &all_return_abort);
 	load_test(&testlist, "ALL: fpe test", &all_return_fpe);
+	load_test(&testlist, "ALL: pipe test", &all_return_pipe);
+	load_test(&testlist, "ALL: ill test", &all_return_ill);
 	return (launch_tests(&testlist));
 }

@@ -1,26 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   all_return_test.h                                  :+:      :+:    :+:   */
+/*   07_pipe.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anclarma <anclarma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/08 14:21:27 by anclarma          #+#    #+#             */
-/*   Updated: 2022/01/09 16:53:25 by anclarma         ###   ########.fr       */
+/*   Created: 2022/01/08 10:34:53 by anclarma          #+#    #+#             */
+/*   Updated: 2022/01/09 16:50:08 by anclarma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef ALL_RETURN_TEST_H
-# define ALL_RETURN_TEST_H
+#include <signal.h>
 
-int	all_return_launcher(void);
-int	all_return_ok(void);
-int	all_return_ko(void);
-int	all_return_segv(void);
-int	all_return_bus(void);
-int	all_return_abort(void);
-int	all_return_fpe(void);
-int	all_return_pipe(void);
-int	all_return_ill(void);
-
-#endif
+/*
+**
+*/
+int	all_return_pipe(void)
+{
+	if (raise(SIGPIPE))
+		return (0);
+	else
+		return (-1);
+}
