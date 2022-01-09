@@ -6,7 +6,7 @@
 #    By: anclarma <anclarma@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/12/10 21:02:42 by anclarma          #+#    #+#              #
-#    Updated: 2022/01/08 18:56:52 by anclarma         ###   ########.fr        #
+#    Updated: 2022/01/08 22:05:23 by anclarma         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -25,7 +25,7 @@ AR			= ar rc
 RM			= rm -f
 MKDIR		= mkdir -p
 CFLAGS		= -Wall -Wextra -Werror	\
-			  -MMD -MP
+			  -MMD -MP -fPIE
 LFLAGS		= -Wall -Wextra -Werror
 CINCLUDES	= -Iincludes			\
 			  -I../libft/includes

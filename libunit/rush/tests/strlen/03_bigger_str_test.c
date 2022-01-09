@@ -6,13 +6,11 @@
 /*   By: anclarma <anclarma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/08 10:34:53 by anclarma          #+#    #+#             */
-/*   Updated: 2022/01/08 18:31:33 by anclarma         ###   ########.fr       */
+/*   Updated: 2022/01/08 21:51:27 by anclarma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-
-#include <stdlib.h>
 
 int	bigger_str_test(void)
 {
