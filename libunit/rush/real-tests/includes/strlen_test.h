@@ -1,26 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   00_launcher.c                                      :+:      :+:    :+:   */
+/*   strlen_test.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anclarma <anclarma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/08 10:33:21 by anclarma          #+#    #+#             */
-/*   Updated: 2022/01/09 18:39:19 by anclarma         ###   ########.fr       */
+/*   Created: 2022/01/08 14:21:27 by anclarma          #+#    #+#             */
+/*   Updated: 2022/01/09 15:39:47 by thi-nguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stddef.h>
-#include "libunit.h"
-#include "basic_test.h"
+#ifndef STRLEN_TEST_H
+# define STRLEN_TEST_H
 
-int	strlen_launcher(void)
-{
-	t_unit_test	*testlist;
+/*
+** 00_launcher.c
+*/
+int	strlen_launcher(void);
 
-	testlist = NULL;
-	load_test(&testlist, "STRLEN: Basic test", &basic_test);
-	load_test(&testlist, "STRLEN: NULL test", &null_test);
-	load_test(&testlist, "STRLEN: Bigger string test", &bigger_str_test);
-	return (launch_tests(&testlist));
-}
+int	strlen_basic_test(void);
+int	strlen_basic_test2(void);
+int	strlen_null_test(void);
+int	strlen_null_test2(void);
+int	strlen_bigger_str_test(void);
+
+#endif

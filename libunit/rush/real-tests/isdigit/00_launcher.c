@@ -3,24 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   00_launcher.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: anclarma <anclarma@student.42.fr>          +#+  +:+       +#+        */
+/*   By: thi-nguy <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/01/08 10:33:21 by anclarma          #+#    #+#             */
-/*   Updated: 2022/01/09 18:39:19 by anclarma         ###   ########.fr       */
+/*   Created: 2022/01/09 18:27:16 by thi-nguy          #+#    #+#             */
+/*   Updated: 2022/01/09 18:45:54 by thi-nguy         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stddef.h>
 #include "libunit.h"
-#include "basic_test.h"
+#include "isdigit_test.h"
 
-int	strlen_launcher(void)
+int	isdigit_launcher(void)
 {
 	t_unit_test	*testlist;
 
 	testlist = NULL;
-	load_test(&testlist, "STRLEN: Basic test", &basic_test);
-	load_test(&testlist, "STRLEN: NULL test", &null_test);
-	load_test(&testlist, "STRLEN: Bigger string test", &bigger_str_test);
+	load_test(&testlist, "ISDIGIT: Basic  test 1", &isdigit_basic_test_1);
+	load_test(&testlist, "ISDIGIT: Basic  test 2", &isdigit_basic_test_2);
+	load_test(&testlist, "ISDIGIT: Basic  test 3", &isdigit_basic_test_3);
 	return (launch_tests(&testlist));
 }
