@@ -6,7 +6,7 @@
 #    By: anclarma <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/01 19:28:48 by anclarma          #+#    #+#              #
-#    Updated: 2022/01/09 12:53:46 by anclarma         ###   ########.fr        #
+#    Updated: 2022/01/09 14:43:55 by anclarma         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,11 +20,11 @@ C_FILES1	= main.c								\
 			  strlen/01_basic_test.c				\
 			  strlen/02_null_test.c					\
 			  strlen/03_bigger_str_test.c			\
-			  all_return/00_all_return_launcher.c	\
-			  all_return/01_all_return_ok.c			\
-			  all_return/02_all_return_ko.c			\
-			  all_return/03_all_return_segv.c		\
-			  all_return/04_all_return_bus.c
+			  all_return/00_launcher.c	\
+			  all_return/01_ok.c			\
+			  all_return/02_ko.c			\
+			  all_return/03_segv.c		\
+			  all_return/04_bus.c
 SRCS1		= $(addprefix $(C_DIR1)/, $(C_FILES1))
 OBJS1		= $(SRCS1:.c=.o)
 DEPS1		= $(SRCS1:.c=.d)
@@ -45,6 +45,8 @@ CLIBS		= -Lframework -Llibft -lunit -lft -lrt
 
 all:		test
 
+bonus:		framework_bonus test
+
 test:		$(NAME1) $(NAME2)
 			./$(NAME1)
 			./$(NAME2)
@@ -63,6 +65,9 @@ $(LIBFT):
 
 $(FRAMEWORK):
 			make -C framework all
+
+framework_bonus:
+			make -C framework bonus
 
 clean:
 			make -C libft fclean
