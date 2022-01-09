@@ -6,7 +6,7 @@
 /*   By: anclarma <anclarma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/09 12:00:16 by anclarma          #+#    #+#             */
-/*   Updated: 2022/01/09 12:51:30 by anclarma         ###   ########.fr       */
+/*   Updated: 2022/01/09 13:01:00 by anclarma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,15 +22,6 @@ int	ft_isalpha_notalpha(void);
 int	ft_isascii_launcher(void);
 int	ft_isascii_ascii(void);
 int	ft_isascii_notascii(void);
-int	ft_isdigit_launcher(void);
-int	ft_isdigit_digit(void);
-int	ft_isdigit_notdigit(void);
-int	ft_isprint_launcher(void);
-int	ft_isprint_print(void);
-int	ft_isprint_notprint(void);
-int	ft_isspace_launcher(void);
-int	ft_isspace_space(void);
-int	ft_isspace_notspace(void);
 int	ft_tolower_launcher(void);
 int	ft_tolower_base(void);
 int	ft_toupper_launcher(void);

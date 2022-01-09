@@ -6,26 +6,21 @@
 /*   By: anclarma <anclarma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/08 10:32:40 by anclarma          #+#    #+#             */
-/*   Updated: 2022/01/09 12:08:14 by anclarma         ###   ########.fr       */
+/*   Updated: 2022/01/09 13:01:02 by anclarma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libunit.h"
 #include "libft_test.h"
 
-int	main(int ac, char **av)
+int	main(void)
 {
 	int	ret;
 
-	(void)ac;
-	(void)av;
 	ret = 0;
 	ret += ft_isalnum_launcher();
 	ret += ft_isalpha_launcher();
 	ret += ft_isascii_launcher();
-	ret += ft_isdigit_launcher();
-	ret += ft_isprint_launcher();
-	ret += ft_isspace_launcher();
 	ret += ft_tolower_launcher();
 	ret += ft_toupper_launcher();
 	ret += ft_memccpy_launcher();
