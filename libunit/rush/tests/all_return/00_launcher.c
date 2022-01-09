@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   00_all_return_launcher.c                           :+:      :+:    :+:   */
+/*   00_launcher.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anclarma <anclarma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/08 10:33:21 by anclarma          #+#    #+#             */
-/*   Updated: 2022/01/09 11:33:04 by anclarma         ###   ########.fr       */
+/*   Updated: 2022/01/09 16:31:10 by anclarma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,5 +23,7 @@ int	all_return_launcher(void)
 	load_test(&testlist, "ALL: ko test", &all_return_ko);
 	load_test(&testlist, "ALL: sigsegv test", &all_return_segv);
 	load_test(&testlist, "ALL: sigbus test", &all_return_bus);
+	load_test(&testlist, "ALL: abort test", &all_return_abort);
+	load_test(&testlist, "ALL: fpe test", &all_return_fpe);
 	return (launch_tests(&testlist));
 }

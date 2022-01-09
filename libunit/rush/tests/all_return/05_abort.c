@@ -1,27 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   04_bus.c                                           :+:      :+:    :+:   */
+/*   05_abort.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anclarma <anclarma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/08 10:34:53 by anclarma          #+#    #+#             */
-/*   Updated: 2022/01/09 16:20:51 by anclarma         ###   ########.fr       */
+/*   Updated: 2022/01/09 16:25:07 by anclarma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdlib.h>
 #include "libft.h"
 
 /*
-** Enable Alignment Checking on x86_64
-** https://en.wikipedia.org/wiki/Bus_error
+** https://stackoverflow.com/questions/11161126/what-causes-a-sigabrt-fault
 */
-int	all_return_bus(void)
+int	all_return_abort(void)
 {
-	char	*str;
-
-	str = "abc";
-	str[0] = 'd';
+	abort();
 	if (0)
 		return (0);
 	else

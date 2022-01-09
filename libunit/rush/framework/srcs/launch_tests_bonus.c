@@ -6,7 +6,7 @@
 /*   By: anclarma <anclarma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/08 11:26:08 by anclarma          #+#    #+#             */
-/*   Updated: 2022/01/09 16:12:46 by anclarma         ###   ########.fr       */
+/*   Updated: 2022/01/09 16:27:51 by anclarma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,21 +25,18 @@ static void	print_test(char *name)
 
 static void	print_result(int status)
 {
-	if (!WIFEXITED(status))
-	{
-		if (status == SIGBUS)
-			ft_putendl_fd("\033[0;33m[SIGBUS]\033[0m", 1);
-		else if (status == SIGABRT)
-			ft_putendl_fd("\033[0;33m[SIGABRT]\033[0m", 1);
-		else if (status == SIGFPE)
-			ft_putendl_fd("\033[0;33m[SIGFPE]\033[0m", 1);
-		else if (status == SIGPIPE)
-			ft_putendl_fd("\033[0;33m[SIGPIPE]\033[0m", 1);
-		else if (status == SIGILL)
-			ft_putendl_fd("\033[0;33m[SIGILL]\033[0m", 1);
-		else if (status == SIGSEGV)
-			ft_putendl_fd("\033[0;33m[SEGV]\033[0m", 1);
-	}
+	if (!WIFEXITED(status) && status == SIGBUS)
+		ft_putendl_fd("\033[0;33m[SIGBUS]\033[0m", 1);
+	else if (!WIFEXITED(status) && status == SIGABRT)
+		ft_putendl_fd("\033[0;33m[SIGABRT]\033[0m", 1);
+	else if (!WIFEXITED(status) && status == SIGFPE)
+		ft_putendl_fd("\033[0;33m[SIGFPE]\033[0m", 1);
+	else if (!WIFEXITED(status) && status == SIGPIPE)
+		ft_putendl_fd("\033[0;33m[SIGPIPE]\033[0m", 1);
+	else if (!WIFEXITED(status) && status == SIGILL)
+		ft_putendl_fd("\033[0;33m[SIGILL]\033[0m", 1);
+	else if (!WIFEXITED(status) && status == SIGSEGV)
+		ft_putendl_fd("\033[0;33m[SEGV]\033[0m", 1);
 	else if (status == 0)
 		ft_putendl_fd("\033[0;32m[OK]\033[0m", 1);
 	else

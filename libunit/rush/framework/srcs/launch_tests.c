@@ -6,7 +6,7 @@
 /*   By: anclarma <anclarma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/08 11:26:08 by anclarma          #+#    #+#             */
-/*   Updated: 2022/01/09 16:00:42 by anclarma         ###   ########.fr       */
+/*   Updated: 2022/01/09 16:26:53 by anclarma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,13 +25,10 @@ static void	print_test(char *name)
 
 static void	print_result(int status)
 {
-	if (!WIFEXITED(status))
-	{
-		if (status == SIGBUS)
-			ft_putendl_fd("[SIGBUS]", 1);
-		else if (status == SIGSEGV)
-			ft_putendl_fd("[SEGV]", 1);
-	}
+	if (!WIFEXITED(status) && status == SIGBUS)
+		ft_putendl_fd("[SIGBUS]", 1);
+	else if (!WIFEXITED(status) && status == SIGSEGV)
+		ft_putendl_fd("[SEGV]", 1);
 	else if (status == 0)
 		ft_putendl_fd("[OK]", 1);
 	else

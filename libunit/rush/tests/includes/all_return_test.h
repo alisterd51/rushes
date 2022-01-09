@@ -6,7 +6,7 @@
 /*   By: anclarma <anclarma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/08 14:21:27 by anclarma          #+#    #+#             */
-/*   Updated: 2022/01/09 11:25:47 by anclarma         ###   ########.fr       */
+/*   Updated: 2022/01/09 16:32:09 by anclarma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,5 +18,7 @@ int	all_return_ok(void);
 int	all_return_ko(void);
 int	all_return_segv(void);
 int	all_return_bus(void);
+int	all_return_abort(void);
+int	all_return_fpe(void);
 
 #endif
