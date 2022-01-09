@@ -6,7 +6,7 @@
 #    By: anclarma <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/01 19:28:48 by anclarma          #+#    #+#              #
-#    Updated: 2022/01/09 11:45:04 by anclarma         ###   ########.fr        #
+#    Updated: 2022/01/09 12:53:46 by anclarma         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,26 +14,31 @@ NAME1		= libunit_tests
 NAME2		= libunit_real-tests
 LIBFT		= libft/libft.a
 FRAMEWORK	= framework/libunit.a
-C_DIR		= .
-O_DIR1		= objs_tests
-C_FILES1	= tests/main.c								\
-			  tests/strlen/00_launcher.c				\
-			  tests/strlen/01_basic_test.c				\
-			  tests/strlen/02_null_test.c				\
-			  tests/strlen/03_bigger_str_test.c			\
-			  tests/all_return/00_all_return_launcher.c	\
-			  tests/all_return/01_all_return_ok.c		\
-			  tests/all_return/02_all_return_ko.c		\
-			  tests/all_return/03_all_return_segv.c		\
-			  tests/all_return/04_all_return_bus.c
-SRCS1		= $(patsubst %, $(C_DIR)/%, $(C_FILES1))
-O_FILES1	= $(C_FILES1:.c=.o)
-OBJS1		= $(patsubst %, $(O_DIR1)/%, $(O_FILES1))
+C_DIR1		= tests
+C_FILES1	= main.c								\
+			  strlen/00_launcher.c					\
+			  strlen/01_basic_test.c				\
+			  strlen/02_null_test.c					\
+			  strlen/03_bigger_str_test.c			\
+			  all_return/00_all_return_launcher.c	\
+			  all_return/01_all_return_ok.c			\
+			  all_return/02_all_return_ko.c			\
+			  all_return/03_all_return_segv.c		\
+			  all_return/04_all_return_bus.c
+SRCS1		= $(addprefix $(C_DIR1)/, $(C_FILES1))
+OBJS1		= $(SRCS1:.c=.o)
+DEPS1		= $(SRCS1:.c=.d)
+C_DIR2		= real-tests
+C_FILES2	= main.c
+SRCS2		= $(addprefix $(C_DIR2)/, $(C_FILES2))
+OBJS2		= $(SRCS2:.c=.o)
+DEPS2		= $(SRCS2:.c=.d)
 CC			= gcc
 CFLAGS		= -Wall -Wextra -Werror		\
 			  -MMD -MP
 LFLAGS		= -Wall -Wextra -Werror
-CINCLUDES	= -Itests/includes			\
+CINCLUDES	= -I$(C_DIR1)/includes	\
+			  -I$(C_DIR2)/includes	\
 			  -Ilibft/includes			\
 			  -Iframework/includes
 CLIBS		= -Lframework -Llibft -lunit -lft -lrt
@@ -44,17 +49,14 @@ test:		$(NAME1) $(NAME2)
 			./$(NAME1)
 			./$(NAME2)
 
-$(O_DIR1)/%.o: $(C_DIR)/%.c
+%.o: %.c
 			$(CC) $(CFLAGS) $(CINCLUDES) -c $< -o $@
 
-$(O_DIR1):
-			mkdir $(O_DIR1)
-			mkdir $(O_DIR1)/tests
-			mkdir $(O_DIR1)/tests/strlen
-			mkdir $(O_DIR1)/tests/all_return
-
-$(NAME1):	$(LIBFT) $(FRAMEWORK) $(O_DIR1) $(OBJS1)
+$(NAME1):	$(LIBFT) $(FRAMEWORK) $(OBJS1)
 			$(CC) $(OBJS1) $(LFLAGS) $(CLIBS) -o $@
+
+$(NAME2):	$(LIBFT) $(FRAMEWORK) $(OBJS2)
+			$(CC) $(OBJS2) $(LFLAGS) $(CLIBS) -o $@
 
 $(LIBFT):
 			make -C libft all
@@ -65,7 +67,8 @@ $(FRAMEWORK):
 clean:
 			make -C libft fclean
 			make -C framework fclean
-			rm -rf $(O_DIR1)
+			rm -rf $(OBJS1) $(DEPS1)
+			rm -rf $(OBJS2) $(DEPS2)
 
 fclean:		clean
 			rm -f $(NAME1)
@@ -73,6 +76,7 @@ fclean:		clean
 
 re:			fclean all
 
--include	$(OBJS:.o=.d)
+-include	$(DEPS1)
+-include	$(DEPS2)
 
 .PHONY:		all clean fclean re
