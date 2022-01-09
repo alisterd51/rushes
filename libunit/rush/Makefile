@@ -6,7 +6,7 @@
 #    By: anclarma <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/01 19:28:48 by anclarma          #+#    #+#              #
-#    Updated: 2022/01/09 14:43:55 by anclarma         ###   ########.fr        #
+#    Updated: 2022/01/09 15:32:07 by anclarma         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -41,15 +41,14 @@ CINCLUDES	= -I$(C_DIR1)/includes	\
 			  -I$(C_DIR2)/includes	\
 			  -Ilibft/includes			\
 			  -Iframework/includes
-CLIBS		= -Lframework -Llibft -lunit -lft -lrt
+CLIBS		= -Lframework -Llibft -lunit -lft
 
 all:		test
 
 bonus:		framework_bonus test
 
-test:		$(NAME1) $(NAME2)
-			./$(NAME1)
-			./$(NAME2)
+test:		$(NAME1)
+			./$(NAME1) ; true
 
 %.o: %.c
 			$(CC) $(CFLAGS) $(CINCLUDES) -c $< -o $@
@@ -85,3 +84,4 @@ re:			fclean all
 -include	$(DEPS2)
 
 .PHONY:		all clean fclean re
+.SILENT:
