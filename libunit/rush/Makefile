@@ -6,12 +6,12 @@
 #    By: anclarma <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/11/01 19:28:48 by anclarma          #+#    #+#              #
-#    Updated: 2022/01/09 18:40:45 by anclarma         ###   ########.fr        #
+#    Updated: 2022/01/09 19:28:31 by anclarma         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME1		= libunit_tests
-NAME2		= libunit_real-tests
+NAME1		= libunit_real-tests
+NAME2		= libunit_tests
 LIBFT		= libft/libft.a
 LIBFTF		= fake_libft/libftfake.a
 FRAMEWORK	= framework/libunit.a
