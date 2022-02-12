@@ -6,7 +6,7 @@
 /*   By: anclarma <anclarma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 10:06:56 by anclarma          #+#    #+#             */
-/*   Updated: 2022/02/12 12:47:27 by anclarma         ###   ########.fr       */
+/*   Updated: 2022/02/12 14:37:23 by anclarma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,51 @@
 #include "libft.h"
 
 #include <stdio.h>
+
+int	line_size(t_list *lst_line)
+{
+	return (ft_atoi(lst_line->content));
+}
+
+int	line_size_max(t_list *lst_line)
+{
+	int	max;
+	int	n_current;
+
+	max = 0;
+	while (lst_line)
+	{
+		n_current = line_size(lst_line);
+		if (n_current > max)
+			max = n_current;
+		lst_line = lst_line->next;
+	}
+	return (max);
+}
+
+void	print_line(int current, int max)
+{
+	int	diff;
+
+	diff = max - current;
+	while (diff-- > 0)
+		write(1, " ", 1);
+	while (current-- > 0)
+		write(1, " |", 2);
+	write(1, "\n", 1);
+}
+
+void	print_board(t_list *lst_line)
+{
+	int	n_max;
+
+	n_max = line_size_max(lst_line);
+	while (lst_line)
+	{
+		print_line(line_size(lst_line), n_max);
+		lst_line = lst_line->next;
+	}
+}
 
 int	ft_strisdigit(char *str)
 {
@@ -81,6 +126,7 @@ int	game(int fd)
 		ft_putendl_fd("ERROR", 2);
 		return (1);
 	}
+	print_board(lst_line);
 	ft_lstclear(&lst_line, free);
 	return (0);
 }
