@@ -6,7 +6,7 @@
 /*   By: anclarma <anclarma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 10:06:56 by anclarma          #+#    #+#             */
-/*   Updated: 2022/02/12 15:49:08 by anclarma         ###   ########.fr       */
+/*   Updated: 2022/02/12 19:20:43 by anclarma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,6 +119,42 @@ int	read_board(t_list **lst_line, int fd)
 	return (0);
 }
 
+int	is_valid_move(int move, t_list *lst_line)
+{
+	return (move >= 1 && move <= 3 && move <= ft_atoi(ft_lstlast(lst_line)->content));
+}
+
+void	apply_move(int move, t_list **lst_line)
+{
+	t_list *prev;
+	t_list *current;
+	int		num_tmp;
+
+	if (*lst_line == NULL)
+		return ;
+	prev = NULL;
+	current = *lst_line;
+	while (current && current->next)
+	{
+		prev = current;
+		current = current->next;
+	}
+	if (ft_atoi(current->content) == move)
+	{
+		ft_lstdelone(current, free);
+		if (prev != NULL)
+			prev->next = NULL;
+		else
+			*lst_line = NULL;
+	}
+	else
+	{
+		num_tmp = ft_atoi(current->content);
+		free(current->content);
+		current->content = ft_itoa(num_tmp - move);
+	}
+}
+
 int	ai_turn(t_list **lst_line)
 {
 	(void)lst_line;
@@ -136,8 +172,28 @@ int	human_turn(t_list **lst_line)
 	valid_choice = 0;
 	ft_putendl_fd("Please choose between 1 and 3 items", 1);
 	ret = get_next_line(0, &line);
-	while (valid_choice == 0)
-		valid_choice = 1;
+	while (valid_choice == 0 && line)
+	{
+		if (valid_line(line) == 0 && is_valid_move(ft_atoi(line), *lst_line))
+		{
+			apply_move(ft_atoi(line), lst_line);
+			valid_choice = 1;
+			free(line);
+			line = NULL;
+		}
+		else
+		{
+			ft_putstr_fd(line, 1);
+			ft_putendl_fd(" - Invalid choice", 1);
+			ft_putendl_fd("Please choose between 1 and 3 items", 1);
+			free(line);
+			line = NULL;
+			ret = get_next_line(0, &line);
+		}
+	}
+	free(line);
+	if (*lst_line == NULL)
+		return (2);
 	return (0);
 }
 
@@ -156,6 +212,10 @@ void	game_loop(t_list **lst_line)
 			end = human_turn(lst_line);
 		}
 	}
+	if (end == 1)
+		ft_putendl_fd("AI is the winner! shame on you!", 1);
+	else if (end == 2)
+		ft_putendl_fd("You are the winner! Congratulations!", 1);
 }
 
 int	game(int fd)

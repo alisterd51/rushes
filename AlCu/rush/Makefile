@@ -6,11 +6,11 @@
 #    By: anclarma <anclarma@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/12 10:04:58 by anclarma          #+#    #+#              #
-#    Updated: 2022/02/12 12:39:03 by anclarma         ###   ########.fr        #
+#    Updated: 2022/02/12 18:57:26 by anclarma         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME		= alum
+NAME		= alum1
 C_DIR		= srcs
 O_DIR		= objs
 C_FILES		= main.c					\
@@ -23,10 +23,14 @@ C_FILES		= main.c					\
 			  ft_strdup.c				\
 			  ft_strjoin.c				\
 			  ft_putendl_fd.c			\
+			  ft_putstr_fd.c			\
 			  ft_secure_atoi.c			\
 			  ft_isspace.c				\
 			  ft_isdigit.c				\
-			  ft_atoi.c
+			  ft_atoi.c					\
+			  ft_itoa.c					\
+			  ft_lstlast.c				\
+			  ft_bzero.c
 SRCS		= $(patsubst %, $(C_DIR)/%, $(C_FILES))
 O_FILES		= $(C_FILES:.c=.o)
 OBJS		= $(patsubst %, $(O_DIR)/%, $(O_FILES))
@@ -34,9 +38,10 @@ CC			= cc
 MAKE		= make
 RM			= rm -f
 MKDIR		= mkdir -p
+FSANITIZE	= -fsanitize=address -fsanitize=leak -fsanitize=undefined -g3
 CFLAGS		= -Wall -Wextra -Werror		\
-			  -MMD -MP
-LFLAGS		= -Wall -Wextra -Werror
+			  -MMD -MP $(FSANITIZE)
+LFLAGS		= -Wall -Wextra -Werror $(FSANITIZE)
 CINCLUDES	= -I ./includes
 CLIBS		=
 
