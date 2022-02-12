@@ -6,7 +6,7 @@
 #    By: anclarma <anclarma@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/12 10:04:58 by anclarma          #+#    #+#              #
-#    Updated: 2022/02/12 11:30:38 by anclarma         ###   ########.fr        #
+#    Updated: 2022/02/12 12:39:03 by anclarma         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,11 @@ C_FILES		= main.c					\
 			  get_next_line.c			\
 			  ft_strdup.c				\
 			  ft_strjoin.c				\
-			  ft_putendl_fd.c
+			  ft_putendl_fd.c			\
+			  ft_secure_atoi.c			\
+			  ft_isspace.c				\
+			  ft_isdigit.c				\
+			  ft_atoi.c
 SRCS		= $(patsubst %, $(C_DIR)/%, $(C_FILES))
 O_FILES		= $(C_FILES:.c=.o)
 OBJS		= $(patsubst %, $(O_DIR)/%, $(O_FILES))

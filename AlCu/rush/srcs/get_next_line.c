@@ -6,7 +6,7 @@
 /*   By: anclarma <anclarma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/27 23:02:47 by anclarma          #+#    #+#             */
-/*   Updated: 2022/01/27 23:35:51 by anclarma         ###   ########.fr       */
+/*   Updated: 2022/02/12 12:23:54 by anclarma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ int	get_next_line(int fd, char **line)
 	char	*tmp;
 	char	buf[2];
 
+	*line = NULL;
 	ret = read(fd, buf, 1);
 	buf[1] = '\0';
 	if (ret <= 0)
@@ -39,5 +40,7 @@ int	get_next_line(int fd, char **line)
 		ret = read(fd, buf, 1);
 	}
 	*line = str;
-	return (1);
+	if (buf[0] == '\n')
+		return (1);
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: anclarma <anclarma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 10:06:56 by anclarma          #+#    #+#             */
-/*   Updated: 2022/02/12 11:30:08 by anclarma         ###   ########.fr       */
+/*   Updated: 2022/02/12 12:47:27 by anclarma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,23 @@
 #include <stdlib.h>
 #include "libft.h"
 
+#include <stdio.h>
+
+int	ft_strisdigit(char *str)
+{
+	while (*str)
+	{
+		if (!ft_isdigit(*str))
+			return (0);
+		str++;
+	}
+	return (1);
+}
+
 int	valid_line(char *line)
 {
-	(void)line;
+	if (!ft_secure_atoi(line) || !ft_strisdigit(line) || ft_atoi(line) <= 0)
+		return (1);
 	return (0);
 }
 
@@ -31,6 +45,7 @@ int	read_board(t_list **lst_line, int fd)
 
 	nb_line = 0;
 	ret = get_next_line(fd, &line);
+	printf("%d: %s\n", ret, line);
 	while (ret > 0)
 	{
 		if (fd == 0 && ft_strlen(line) == 0)
@@ -41,12 +56,17 @@ int	read_board(t_list **lst_line, int fd)
 		new_node = ft_lstnew(line);
 		ft_lstadd_back(lst_line, new_node);
 		nb_line++;
-		if (nb_line > 10000 || valid_line(line) == -1)
+		if (nb_line > 10000 || valid_line(line) != 0)
 			return (-1);
 		ret = get_next_line(fd, &line);
+		printf("%d: %s\n", ret, line);
 	}
-	if (ret == -1)
+	if (ret == -1 || (ret == 0 && line))
+	{
+		free(line);
 		return (-1);
+	}
+	free(line);
 	return (0);
 }
 
@@ -55,7 +75,7 @@ int	game(int fd)
 	t_list	*lst_line;
 
 	lst_line = NULL;
-	if (read_board(&lst_line, fd) != 0)
+	if (read_board(&lst_line, fd) != 0 || lst_line == NULL)
 	{
 		ft_lstclear(&lst_line, free);
 		ft_putendl_fd("ERROR", 2);

@@ -6,7 +6,7 @@
 /*   By: anclarma <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/12 18:01:55 by anclarma          #+#    #+#             */
-/*   Updated: 2022/02/12 11:02:35 by anclarma         ###   ########.fr       */
+/*   Updated: 2022/02/12 12:36:20 by anclarma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,7 @@ char	*ft_itoa(int n);
 void	*ft_calloc(size_t count, size_t size);
 void	*ft_realloc(void *ptr, size_t size);
 char	*ft_realpath(const char *path, char *resolved_path);
+int		ft_secure_atoi(const char *str);
 
 /*
 ** get_next_line.c
