@@ -6,7 +6,7 @@
 /*   By: anclarma <anclarma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 10:06:56 by anclarma          #+#    #+#             */
-/*   Updated: 2022/02/12 14:37:23 by anclarma         ###   ########.fr       */
+/*   Updated: 2022/02/12 15:49:08 by anclarma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,9 +74,15 @@ int	ft_strisdigit(char *str)
 	return (1);
 }
 
+int	empty_line(char *line)
+{
+	return (line && line[0] == '\0');
+}
+
 int	valid_line(char *line)
 {
-	if (!ft_secure_atoi(line) || !ft_strisdigit(line) || ft_atoi(line) <= 0)
+	if (!empty_line(line) && (!ft_secure_atoi(line) || !ft_strisdigit(line)
+				|| ft_atoi(line) <= 0))
 		return (1);
 	return (0);
 }
@@ -90,10 +96,9 @@ int	read_board(t_list **lst_line, int fd)
 
 	nb_line = 0;
 	ret = get_next_line(fd, &line);
-	printf("%d: %s\n", ret, line);
 	while (ret > 0)
 	{
-		if (fd == 0 && ft_strlen(line) == 0)
+		if (empty_line(line))
 		{
 			free(line);
 			return (0);
@@ -104,7 +109,6 @@ int	read_board(t_list **lst_line, int fd)
 		if (nb_line > 10000 || valid_line(line) != 0)
 			return (-1);
 		ret = get_next_line(fd, &line);
-		printf("%d: %s\n", ret, line);
 	}
 	if (ret == -1 || (ret == 0 && line))
 	{
@@ -115,6 +119,45 @@ int	read_board(t_list **lst_line, int fd)
 	return (0);
 }
 
+int	ai_turn(t_list **lst_line)
+{
+	(void)lst_line;
+	ft_putendl_fd("AI took truc", 1);
+	return (0);
+}
+
+int	human_turn(t_list **lst_line)
+{
+	int		ret;
+	int		valid_choice;
+	char	*line;
+
+	(void)lst_line;
+	valid_choice = 0;
+	ft_putendl_fd("Please choose between 1 and 3 items", 1);
+	ret = get_next_line(0, &line);
+	while (valid_choice == 0)
+		valid_choice = 1;
+	return (0);
+}
+
+void	game_loop(t_list **lst_line)
+{
+	int	end;
+
+	end = 0;
+	while (!end)
+	{
+		print_board(*lst_line);
+		end = ai_turn(lst_line);
+		if (!end)
+		{
+			print_board(*lst_line);
+			end = human_turn(lst_line);
+		}
+	}
+}
+
 int	game(int fd)
 {
 	t_list	*lst_line;
@@ -122,11 +165,15 @@ int	game(int fd)
 	lst_line = NULL;
 	if (read_board(&lst_line, fd) != 0 || lst_line == NULL)
 	{
+		close(fd);
 		ft_lstclear(&lst_line, free);
 		ft_putendl_fd("ERROR", 2);
 		return (1);
 	}
-	print_board(lst_line);
+	close(fd);
+	if (fd == 0)
+		open("/dev/tty", O_RDONLY);
+	game_loop(&lst_line);
 	ft_lstclear(&lst_line, free);
 	return (0);
 }
@@ -138,7 +185,7 @@ int	main(int ac, char **av)
 	if (ac == 1)
 		fd = 0;
 	else if (ac == 2)
-		fd = open(av[0], O_RDONLY);
+		fd = open(av[1], O_RDONLY);
 	else
 		fd = -1;
 	if (fd == -1 || game(fd) == -1 || (fd != 0 && close(fd) == -1))
