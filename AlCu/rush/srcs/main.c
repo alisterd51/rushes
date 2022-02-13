@@ -6,7 +6,7 @@
 /*   By: anclarma <anclarma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 10:06:56 by anclarma          #+#    #+#             */
-/*   Updated: 2022/02/13 05:41:03 by anclarma         ###   ########.fr       */
+/*   Updated: 2022/02/13 06:00:30 by anclarma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -222,6 +222,7 @@ int	human_turn(t_list **lst_line)
 			apply_move(ft_atoi(line), lst_line);
 			valid_choice = 1;
 			free(line);
+			line = NULL;
 		}
 		else
 		{
@@ -233,7 +234,7 @@ int	human_turn(t_list **lst_line)
 		}
 	}
 	free(line);
-	if (line == NULL)
+	if (line == NULL && valid_choice == 0)
 		return (-1);
 	if (*lst_line == NULL)
 		return (2);

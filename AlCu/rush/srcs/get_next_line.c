@@ -6,7 +6,7 @@
 /*   By: anclarma <anclarma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/27 23:02:47 by anclarma          #+#    #+#             */
-/*   Updated: 2022/02/12 12:23:54 by anclarma         ###   ########.fr       */
+/*   Updated: 2022/02/13 05:54:23 by anclarma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,16 @@
 #include <stdlib.h>
 #include <stddef.h>
 #include "libft.h"
+
+static int	ft_read(int fd, char **tmp, char **str, char (*buf)[2])
+{
+	*tmp = *str;
+	*str = ft_strjoin(*tmp, *buf);
+	if (*str == NULL)
+		return (-1);
+	free(*tmp);
+	return (read(fd, *buf, 1));
+}
 
 int	get_next_line(int fd, char **line)
 {
@@ -32,12 +42,9 @@ int	get_next_line(int fd, char **line)
 		return (-1);
 	while (ret > 0 && buf[0] != '\n')
 	{
-		tmp = str;
-		str = ft_strjoin(tmp, buf);
-		if (!str)
+		ret = ft_read(fd, &tmp, &str, &buf);
+		if (ret == -1)
 			return (-1);
-		free(tmp);
-		ret = read(fd, buf, 1);
 	}
 	*line = str;
 	if (buf[0] == '\n')
