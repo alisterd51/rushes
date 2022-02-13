@@ -6,7 +6,7 @@
 /*   By: anclarma <anclarma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 10:06:56 by anclarma          #+#    #+#             */
-/*   Updated: 2022/02/13 11:26:05 by anclarma         ###   ########.fr       */
+/*   Updated: 2022/02/13 12:50:21 by anclarma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,8 @@ static int	read_board(t_list **lst_line, int fd)
 		if (empty_line(line))
 			return (ft_free(&line, 0));
 		new_node = ft_lstnew(line);
+		if (new_node == NULL)
+			return (ft_free(&line, -1));
 		ft_lstadd_back(lst_line, new_node);
 		nb_line++;
 		if (nb_line > 10000 || valid_line(line) != 0)
@@ -87,6 +89,8 @@ static void	game_loop(t_list **lst_line)
 		ft_putendl_fd("You are the winner! Congratulations!", 1);
 	else if (end == -1)
 		ft_putendl_fd("stdin has been closed for an unknown reason", 1);
+	else if (end == -2)
+		ft_putendl_fd("malloc error", 1);
 }
 
 int	game(int fd)
@@ -99,7 +103,7 @@ int	game(int fd)
 		close(fd);
 		ft_lstclear(&lst_line, free);
 		ft_putendl_fd("ERROR", 2);
-		return (1);
+		return (-1);
 	}
 	close(fd);
 	if (fd == 0)

@@ -6,7 +6,7 @@
 /*   By: anclarma <anclarma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/27 23:02:47 by anclarma          #+#    #+#             */
-/*   Updated: 2022/02/13 05:54:23 by anclarma         ###   ########.fr       */
+/*   Updated: 2022/02/13 12:18:25 by anclarma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ static int	ft_read(int fd, char **tmp, char **str, char (*buf)[2])
 {
 	*tmp = *str;
 	*str = ft_strjoin(*tmp, *buf);
+	free(*tmp);
 	if (*str == NULL)
 		return (-1);
-	free(*tmp);
 	return (read(fd, *buf, 1));
 }
 

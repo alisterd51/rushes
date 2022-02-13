@@ -6,7 +6,7 @@
 /*   By: anclarma <anclarma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 10:06:56 by anclarma          #+#    #+#             */
-/*   Updated: 2022/02/13 11:29:21 by anclarma         ###   ########.fr       */
+/*   Updated: 2022/02/13 12:01:25 by anclarma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,5 +61,7 @@ int	ai_turn(t_list **lst_line)
 	apply_move(move, lst_line);
 	if (*lst_line == NULL)
 		return (1);
+	if (ft_lstlast(*lst_line)->content == NULL)
+		return (-2);
 	return (0);
 }
