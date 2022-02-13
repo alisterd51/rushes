@@ -6,7 +6,7 @@
 /*   By: anclarma <anclarma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 10:06:56 by anclarma          #+#    #+#             */
-/*   Updated: 2022/02/13 12:50:21 by anclarma         ###   ########.fr       */
+/*   Updated: 2022/02/13 14:47:42 by anclarma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ static int	read_board(t_list **lst_line, int fd)
 			return (ft_free(&line, -1));
 		ft_lstadd_back(lst_line, new_node);
 		nb_line++;
-		if (nb_line > 10000 || valid_line(line) != 0)
+		if (valid_line(line) != 0)
 			return (-1);
 		ret = get_next_line(fd, &line);
 	}

@@ -6,7 +6,7 @@
 /*   By: anclarma <anclarma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 10:06:56 by anclarma          #+#    #+#             */
-/*   Updated: 2022/02/13 11:27:27 by anclarma         ###   ########.fr       */
+/*   Updated: 2022/02/13 14:49:32 by anclarma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	empty_line(char *line)
 int	valid_line(char *line)
 {
 	if (!empty_line(line) && (!ft_secure_atoi(line) || !ft_strisdigit(line)
-			|| ft_atoi(line) <= 0))
+			|| ft_atoi(line) <= 0 || ft_atoi(line) > 10000))
 		return (1);
 	return (0);
 }
