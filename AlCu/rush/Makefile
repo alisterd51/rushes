@@ -6,7 +6,7 @@
 #    By: anclarma <anclarma@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/12 10:04:58 by anclarma          #+#    #+#              #
-#    Updated: 2022/02/12 18:57:26 by anclarma         ###   ########.fr        #
+#    Updated: 2022/02/13 05:19:16 by anclarma         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,12 +18,15 @@ C_FILES		= main.c					\
 			  ft_lstnew.c				\
 			  ft_lstclear.c				\
 			  ft_lstdelone.c			\
+			  ft_lstsize.c				\
 			  ft_strlen.c				\
 			  get_next_line.c			\
 			  ft_strdup.c				\
 			  ft_strjoin.c				\
 			  ft_putendl_fd.c			\
 			  ft_putstr_fd.c			\
+			  ft_putnbr_fd.c			\
+			  ft_putchar_fd.c			\
 			  ft_secure_atoi.c			\
 			  ft_isspace.c				\
 			  ft_isdigit.c				\

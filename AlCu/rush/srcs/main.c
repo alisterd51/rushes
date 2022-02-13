@@ -6,7 +6,7 @@
 /*   By: anclarma <anclarma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 10:06:56 by anclarma          #+#    #+#             */
-/*   Updated: 2022/02/12 19:20:43 by anclarma         ###   ########.fr       */
+/*   Updated: 2022/02/13 05:21:18 by anclarma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,11 +154,54 @@ void	apply_move(int move, t_list **lst_line)
 		current->content = ft_itoa(num_tmp - move);
 	}
 }
+int	eval_line(int line)
+{
+	return (line == 1 || (line - 1) % 4 == 0);
+}
+
+int	eval_all_line(t_list *lst_line)
+{
+	int	n;
+
+	n = 0;
+	while (lst_line && lst_line->next)
+	{
+		n += eval_line(ft_atoi(lst_line->content));
+		lst_line = lst_line->next;
+	}
+	return (n);
+}
+
+int	ia_choice_win(int line)
+{
+	if (line == 1 || (line - 1) % 4 == 0)
+		return (1);
+	else
+		return ((line - 1) % 4);
+}
+
+int	ia_choice_lose(int line)
+{
+	if (line < 4)
+		return (line);
+	else
+		return (4 - ia_choice_win(line));
+}
 
 int	ai_turn(t_list **lst_line)
 {
-	(void)lst_line;
-	ft_putendl_fd("AI took truc", 1);
+	int	move;
+
+	if (ft_lstsize(*lst_line) == 1 || eval_all_line(*lst_line) % 2 == 0)
+		move = ia_choice_win(ft_atoi(ft_lstlast(*lst_line)->content));
+	else
+		move = ia_choice_lose(ft_atoi(ft_lstlast(*lst_line)->content));
+	ft_putstr_fd("AI took ", 1);
+	ft_putnbr_fd(move, 1);
+	ft_putchar_fd('\n', 1);
+	apply_move(move, lst_line);
+	if (*lst_line == NULL)
+		return (1);
 	return (0);
 }
 
@@ -212,9 +255,9 @@ void	game_loop(t_list **lst_line)
 			end = human_turn(lst_line);
 		}
 	}
-	if (end == 1)
+	if (end == 2)
 		ft_putendl_fd("AI is the winner! shame on you!", 1);
-	else if (end == 2)
+	else if (end == 1)
 		ft_putendl_fd("You are the winner! Congratulations!", 1);
 }
 
