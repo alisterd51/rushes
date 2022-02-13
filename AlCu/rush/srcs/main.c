@@ -6,7 +6,7 @@
 /*   By: anclarma <anclarma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 10:06:56 by anclarma          #+#    #+#             */
-/*   Updated: 2022/02/13 05:21:18 by anclarma         ###   ########.fr       */
+/*   Updated: 2022/02/13 05:41:03 by anclarma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -222,7 +222,6 @@ int	human_turn(t_list **lst_line)
 			apply_move(ft_atoi(line), lst_line);
 			valid_choice = 1;
 			free(line);
-			line = NULL;
 		}
 		else
 		{
@@ -230,11 +229,12 @@ int	human_turn(t_list **lst_line)
 			ft_putendl_fd(" - Invalid choice", 1);
 			ft_putendl_fd("Please choose between 1 and 3 items", 1);
 			free(line);
-			line = NULL;
 			ret = get_next_line(0, &line);
 		}
 	}
 	free(line);
+	if (line == NULL)
+		return (-1);
 	if (*lst_line == NULL)
 		return (2);
 	return (0);
@@ -259,6 +259,8 @@ void	game_loop(t_list **lst_line)
 		ft_putendl_fd("AI is the winner! shame on you!", 1);
 	else if (end == 1)
 		ft_putendl_fd("You are the winner! Congratulations!", 1);
+	else if (end == -1)
+		ft_putendl_fd("stdin has been closed for an unknown reason", 1);
 }
 
 int	game(int fd)

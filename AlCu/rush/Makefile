@@ -6,7 +6,7 @@
 #    By: anclarma <anclarma@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/12 10:04:58 by anclarma          #+#    #+#              #
-#    Updated: 2022/02/13 05:19:16 by anclarma         ###   ########.fr        #
+#    Updated: 2022/02/13 05:24:06 by anclarma         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -43,8 +43,8 @@ RM			= rm -f
 MKDIR		= mkdir -p
 FSANITIZE	= -fsanitize=address -fsanitize=leak -fsanitize=undefined -g3
 CFLAGS		= -Wall -Wextra -Werror		\
-			  -MMD -MP $(FSANITIZE)
-LFLAGS		= -Wall -Wextra -Werror $(FSANITIZE)
+			  -MMD -MP #$(FSANITIZE)
+LFLAGS		= -Wall -Wextra -Werror #$(FSANITIZE)
 CINCLUDES	= -I ./includes
 CLIBS		=
 
