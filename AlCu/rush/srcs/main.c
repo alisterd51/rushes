@@ -6,7 +6,7 @@
 /*   By: anclarma <anclarma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/12 10:06:56 by anclarma          #+#    #+#             */
-/*   Updated: 2022/02/13 06:00:30 by anclarma         ###   ########.fr       */
+/*   Updated: 2022/02/13 10:22:43 by anclarma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -154,6 +154,7 @@ void	apply_move(int move, t_list **lst_line)
 		current->content = ft_itoa(num_tmp - move);
 	}
 }
+
 int	eval_line(int line)
 {
 	return (line == 1 || (line - 1) % 4 == 0);
@@ -182,10 +183,10 @@ int	ia_choice_win(int line)
 
 int	ia_choice_lose(int line)
 {
-	if (line < 4)
-		return (line);
+	if (line % 4 == 0)
+		return (1);
 	else
-		return (4 - ia_choice_win(line));
+		return (line % 4);
 }
 
 int	ai_turn(t_list **lst_line)
