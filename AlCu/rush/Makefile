@@ -6,7 +6,7 @@
 #    By: anclarma <anclarma@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/02/12 10:04:58 by anclarma          #+#    #+#              #
-#    Updated: 2022/02/13 05:24:06 by anclarma         ###   ########.fr        #
+#    Updated: 2022/02/13 11:32:57 by anclarma         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,6 +23,7 @@ C_FILES		= main.c					\
 			  get_next_line.c			\
 			  ft_strdup.c				\
 			  ft_strjoin.c				\
+			  ft_strisdigit.c			\
 			  ft_putendl_fd.c			\
 			  ft_putstr_fd.c			\
 			  ft_putnbr_fd.c			\
@@ -33,7 +34,12 @@ C_FILES		= main.c					\
 			  ft_atoi.c					\
 			  ft_itoa.c					\
 			  ft_lstlast.c				\
-			  ft_bzero.c
+			  ft_bzero.c				\
+			  game.c					\
+			  ai_turn.c					\
+			  human_turn.c				\
+			  apply_move.c				\
+			  alcu_utils.c
 SRCS		= $(patsubst %, $(C_DIR)/%, $(C_FILES))
 O_FILES		= $(C_FILES:.c=.o)
 OBJS		= $(patsubst %, $(O_DIR)/%, $(O_FILES))

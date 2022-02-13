@@ -6,7 +6,7 @@
 /*   By: anclarma <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/12 18:01:55 by anclarma          #+#    #+#             */
-/*   Updated: 2022/02/12 12:36:20 by anclarma         ###   ########.fr       */
+/*   Updated: 2022/02/13 11:19:04 by anclarma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,5 +91,10 @@ int		ft_secure_atoi(const char *str);
 ** get_next_line.c
 */
 int		get_next_line(int fd, char **line);
+
+/*
+** other
+*/
+int		ft_strisdigit(char *str);
 
 #endif

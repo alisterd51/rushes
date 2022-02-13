@@ -1,32 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   alcu.h                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: anclarma <anclarma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/12 10:06:56 by anclarma          #+#    #+#             */
-/*   Updated: 2022/02/13 11:21:22 by anclarma         ###   ########.fr       */
+/*   Created: 2022/02/13 11:19:46 by anclarma          #+#    #+#             */
+/*   Updated: 2022/02/13 11:34:33 by anclarma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <sys/stat.h>
-#include <fcntl.h>
-#include <unistd.h>
-#include "alcu.h"
-#include "libft.h"
+#ifndef ALCU_H
+# define ALCU_H
 
-int	main(int ac, char **av)
-{
-	int		fd;
+# include "libft.h"
 
-	if (ac == 1)
-		fd = 0;
-	else if (ac == 2)
-		fd = open(av[1], O_RDONLY);
-	else
-		fd = -1;
-	if (fd == -1 || game(fd) == -1 || (fd != 0 && close(fd) == -1))
-		return (1);
-	return (0);
-}
+int		game(int fd);
+int		ai_turn(t_list **lst_line);
+int		human_turn(t_list **lst_line);
+void	apply_move(int move, t_list **lst_line);
+int		line_size(t_list *lst_line);
+int		line_size_max(t_list *lst_line);
+int		empty_line(char *line);
+int		valid_line(char *line);
+int		ft_free(char **ptr, int ret);
+
+#endif
