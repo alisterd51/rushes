@@ -6,7 +6,7 @@
 /*   By: anclarma <anclarma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 21:43:42 by anclarma          #+#    #+#             */
-/*   Updated: 2022/05/13 21:43:50 by anclarma         ###   ########.fr       */
+/*   Updated: 2022/05/13 22:49:55 by anclarma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ class	wordle
 		virtual	~wordle(void);
 
 		wordle	&operator=(wordle const &rhs);
+		void	title(void) const;
 	protected:
 
 	private:
