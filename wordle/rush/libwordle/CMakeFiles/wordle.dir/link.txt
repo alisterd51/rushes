@@ -1,0 +1,2 @@
+/usr/bin/ar qc libwordle.a  CMakeFiles/wordle.dir/wordle.cpp.o
+/usr/bin/ranlib libwordle.a
