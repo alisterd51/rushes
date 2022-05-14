@@ -6,7 +6,7 @@
 /*   By: anclarma <anclarma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 21:43:08 by anclarma          #+#    #+#             */
-/*   Updated: 2022/05/14 07:30:44 by anclarma         ###   ########.fr       */
+/*   Updated: 2022/05/14 10:35:49 by anclarma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,7 @@ wordle::wordle(void) :
 	_index(0)
 {
 	for (unsigned int i = 0; i < WORDLE_NB_LINE; ++i)
-		for (unsigned int j = 0; j < WORDLE_NB_LETTER; ++j)
-			_lines[i][j] = '_';
+		_lines[i] = "_____";
 	return ;
 }
 
@@ -37,8 +36,7 @@ wordle::wordle(std::string const &filename) :
 	_wordList(filename)
 {
 	for (unsigned int i = 0; i < WORDLE_NB_LINE; ++i)
-		for (unsigned int j = 0; j < WORDLE_NB_LETTER; ++j)
-			_lines[i][j] = '_';
+		_lines[i] = "_____";
 	return ;
 }
 
@@ -52,8 +50,7 @@ wordle	&wordle::operator=(wordle const &rhs)
 	if (this != &rhs)
 	{
 		for (unsigned int i = 0; i < WORDLE_NB_LINE; ++i)
-			for (unsigned int j = 0; j < WORDLE_NB_LINE; ++j)
-				this->_lines[i][j] = rhs._lines[i][j];
+			this->_lines[i] = rhs._lines[i];
 		this->_index = rhs._index;
 		this->_secretWord = rhs._secretWord;
 		this->_wordList = rhs._wordList;
@@ -102,18 +99,13 @@ void	wordle::getAttemp(void)
 	std::transform(word.begin(), word.end(), word.begin(), ::toupper);
 	if (word.size() == 0)
 		std::cout << "empty word" << std::endl;
-	else if (word.size() <= WORDLE_NB_LETTER)
-	{
-		if (!this->isWord(word))
-		{
-			std::cout << "contains non-alphabetic characters" << std::endl;
-			return ;
-		}
-		this->attempt(word);
-	}
-	else
+	else if (word.size() > WORDLE_NB_LETTER)
 		std::cout << "your input is longer than " << WORDLE_NB_LETTER
-			<< " letter" << std::endl;
+            << " letter" << std::endl;
+	else if (!this->isWord(word))
+		std::cout << "contains non-alphabetic characters" << std::endl;
+	else
+		this->attempt(word);
 }
 
 void	wordle::attempt(std::string const &word)
@@ -153,11 +145,8 @@ bool	wordle::isWin(void) const
 {
 	if (_index > 0)
 	{
-		for (unsigned int i = 0; i < WORDLE_NB_LETTER; ++i)
-		{
-			if (_lines[_index - 1][i] != _secretWord[i])
-				return (false);
-		}
+		if (_lines[_index - 1] != _secretWord)
+			return (false);
 		return (true);
 	}
 	return (false);
