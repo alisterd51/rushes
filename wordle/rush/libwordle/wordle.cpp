@@ -6,7 +6,7 @@
 /*   By: anclarma <anclarma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 21:43:08 by anclarma          #+#    #+#             */
-/*   Updated: 2022/05/14 06:32:28 by anclarma         ###   ########.fr       */
+/*   Updated: 2022/05/14 07:30:44 by anclarma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,13 +104,10 @@ void	wordle::getAttemp(void)
 		std::cout << "empty word" << std::endl;
 	else if (word.size() <= WORDLE_NB_LETTER)
 	{
-		for (unsigned int i = 0; word[i]; ++i)
+		if (!this->isWord(word))
 		{
-			if (!isalpha(word[i]))
-			{
-				std::cout << "contains non-alphabetic characters" << std::endl;
-				return ;
-			}
+			std::cout << "contains non-alphabetic characters" << std::endl;
+			return ;
 		}
 		this->attempt(word);
 	}
@@ -166,6 +163,14 @@ bool	wordle::isWin(void) const
 	return (false);
 }
 
+bool	wordle::isWord(std::string const &word) const
+{
+	for (unsigned int i = 0; word[i]; ++i)
+		if (!isalpha(word[i]))
+			return (false);
+	return (true);
+}
+
 void	wordle::chooseSecretWord(void)
 {
 	std::ifstream	infile;
@@ -180,7 +185,7 @@ void	wordle::chooseSecretWord(void)
 		while (!infile.eof())
 		{
 			std::getline(infile, word);
-			if (word.length() == WORDLE_NB_LETTER)
+			if (word.length() == WORDLE_NB_LETTER && this->isWord(word))
 				vectorPasswd.push_back(word);
 		}
 		std::cout << "Total words available: " << vectorPasswd.size()

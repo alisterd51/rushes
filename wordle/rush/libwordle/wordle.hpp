@@ -6,7 +6,7 @@
 /*   By: anclarma <anclarma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 21:43:42 by anclarma          #+#    #+#             */
-/*   Updated: 2022/05/14 04:26:39 by anclarma         ###   ########.fr       */
+/*   Updated: 2022/05/14 07:26:44 by anclarma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ class	wordle
 		void	attempt(std::string const &word);
 		bool	game(void);
 		bool	isWin(void) const;
+		bool	isWord(std::string const &word) const;
 		void	chooseSecretWord(void);
 	protected:
 
