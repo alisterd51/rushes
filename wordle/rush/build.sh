@@ -12,4 +12,4 @@ mkdir build
 cd build
 cmake ..
 cmake --build .
-./main
+./main ../words.txt

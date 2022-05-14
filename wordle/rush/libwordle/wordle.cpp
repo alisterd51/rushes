@@ -6,12 +6,15 @@
 /*   By: anclarma <anclarma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 21:43:08 by anclarma          #+#    #+#             */
-/*   Updated: 2022/05/14 02:48:07 by anclarma         ###   ########.fr       */
+/*   Updated: 2022/05/14 04:47:06 by anclarma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <algorithm>
 #include <iostream>
+#include <fstream>
 #include <cctype>
+#include <vector>
 #include "wordle.hpp"
 
 wordle::wordle(void) :
@@ -29,12 +32,12 @@ wordle::wordle(wordle const &src)
 	return ;
 }
 
-wordle::wordle(std::string const &secret) :
+wordle::wordle(std::string const &filename) :
 	_index(0),
-	_secretWord(secret)
+	_wordList(filename)
 {
 	for (unsigned int i = 0; i < WORDLE_NB_LINE; ++i)
-		for (unsigned int j = 0; j < WORDLE_NB_LINE; ++j)
+		for (unsigned int j = 0; j < WORDLE_NB_LETTER; ++j)
 			_lines[i][j] = '_';
 	return ;
 }
@@ -91,14 +94,13 @@ void	wordle::printGrid(void) const
 	}
 }
 
-bool	wordle::getAttemp(void)
+void	wordle::getAttemp(void)
 {
 	std::string	word;
 
 	std::cout << "input: ";
 	std::getline(std::cin, word);
 	this->attempt(word);
-	return (true);
 }
 
 void	wordle::attempt(std::string const &word)
@@ -116,15 +118,78 @@ void	wordle::attempt(std::string const &word)
 bool	wordle::game(void)
 {
 	this->printTitle();
+	this->chooseSecretWord();
+	this->printGrid();
 	while (this->_index < WORDLE_NB_LINE)
 	{
 		this->getAttemp();
 		if (std::cin.eof())
 		{
 			std::cout << "unexpected end of file" << std::endl;
-			break;
+			return (false);
 		}
 		this->printGrid();
+		if (this->isWin())
+		{
+			std::cout << "Congratulations you found word " << this->_secretWord
+				<< " in " << this->_index << " guesses" << std::endl;
+			return (true);
+		}
+	}
+	std::cout << "unfortunately you did not find the word " << this->_secretWord
+		<< " despite " << WORDLE_NB_LINE << " guesses" << std::endl;
+	return (false);
+}
+
+bool	wordle::isWin(void) const
+{
+	if (_index > 0)
+	{
+		for (unsigned int i = 0; i < WORDLE_NB_LETTER; ++i)
+		{
+			if (_lines[_index - 1][i] != _secretWord[i])
+				return (false);
+		}
+		return (true);
 	}
 	return (false);
+}
+
+void	wordle::chooseSecretWord(void)
+{
+	std::ifstream	infile;
+	std::string		passwd;
+
+	infile.open(this->_wordList.c_str());
+	if (infile.is_open())
+	{
+		std::vector<std::string>	vectorPasswd;
+		std::string					word;
+
+		while (!infile.eof())
+		{
+			std::getline(infile, word);
+			if (word.length() == WORDLE_NB_LETTER)
+				vectorPasswd.push_back(word);
+		}
+		std::cout << "Total words available: " << vectorPasswd.size()
+			<< std::endl;
+		if (vectorPasswd.size() > 0)
+			passwd = vectorPasswd[rand() % vectorPasswd.size()];
+		else
+		{
+			std::cout << "not enough words, using default password"
+				<< std::endl;
+			passwd = WORDLE_DEFAULT_PWD;
+		}
+		infile.close();
+	}
+	else
+	{
+		std::cout << "Failed to open file " << _wordList
+			<< ", using default password" << std::endl;
+		passwd = WORDLE_DEFAULT_PWD;
+	}
+	std::transform(passwd.begin(), passwd.end(), passwd.begin(), ::toupper);
+	this->_secretWord = passwd;
 }
