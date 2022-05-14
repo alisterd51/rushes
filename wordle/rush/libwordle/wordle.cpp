@@ -6,7 +6,7 @@
 /*   By: anclarma <anclarma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 21:43:08 by anclarma          #+#    #+#             */
-/*   Updated: 2022/05/14 04:47:06 by anclarma         ###   ########.fr       */
+/*   Updated: 2022/05/14 05:03:13 by anclarma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -100,19 +100,20 @@ void	wordle::getAttemp(void)
 
 	std::cout << "input: ";
 	std::getline(std::cin, word);
-	this->attempt(word);
+	if (word.size() <= WORDLE_NB_LETTER)
+		this->attempt(word);
+	else
+		std::cout << "your input is longer than " << WORDLE_NB_LETTER
+			<< " letter" << std::endl;
 }
 
 void	wordle::attempt(std::string const &word)
 {
-	if (word.size() <= WORDLE_NB_LETTER)
+	for (unsigned int i = 0; word[i]; ++i)
 	{
-		for (unsigned int i = 0; word[i]; ++i)
-		{
-			_lines[_index][i] = toupper(word[i]);
-		}
-		++this->_index;
+		_lines[_index][i] = toupper(word[i]);
 	}
+	++this->_index;
 }
 
 bool	wordle::game(void)
