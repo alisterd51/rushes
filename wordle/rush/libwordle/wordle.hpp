@@ -6,12 +6,14 @@
 /*   By: anclarma <anclarma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 21:43:42 by anclarma          #+#    #+#             */
-/*   Updated: 2022/05/14 10:28:56 by anclarma         ###   ########.fr       */
+/*   Updated: 2022/05/14 17:30:08 by anclarma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef WORDLE_HPP
 # define WORDLE_HPP
+
+# include <vector>
 
 # define WORDLE_NB_LINE		6U
 # define WORDLE_NB_LETTER	5U
@@ -40,10 +42,11 @@ class	wordle
 		bool	isWord(std::string const &word) const;
 		void	chooseSecretWord(void);
 	private:
-		std::string		_lines[WORDLE_NB_LINE];
-		unsigned int	_index;
-		std::string		_secretWord;
-		std::string		_wordList;
+		std::string					_lines[WORDLE_NB_LINE];
+		unsigned int				_index;
+		std::string					_secretWord;
+		std::string					_wordList;
+		std::vector<std::string>	_vectorPasswd;
 };
 
 #endif

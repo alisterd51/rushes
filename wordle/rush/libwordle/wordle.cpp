@@ -6,7 +6,7 @@
 /*   By: anclarma <anclarma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 21:43:08 by anclarma          #+#    #+#             */
-/*   Updated: 2022/05/14 16:06:29 by anclarma         ###   ########.fr       */
+/*   Updated: 2022/05/14 17:38:27 by anclarma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,13 +106,12 @@ void	wordle::getAttemp(void)
 	std::cout << "input: ";
 	std::getline(std::cin, word);
 	std::transform(word.begin(), word.end(), word.begin(), ::toupper);
-	if (word.size() == 0)
-		std::cout << "empty word" << std::endl;
-	else if (word.size() > WORDLE_NB_LETTER)
-		std::cout << "your input is longer than " << WORDLE_NB_LETTER
+	if (word.size() != WORDLE_NB_LETTER)
+		std::cout << "this word is not strictly equal to " << WORDLE_NB_LETTER
             << " letter" << std::endl;
 	else if (!this->isWord(word))
-		std::cout << "contains non-alphabetic characters" << std::endl;
+		std::cout << "this word is not in the given word dictionary."
+			<< std::endl;
 	else
 		this->attempt(word);
 }
@@ -163,10 +162,10 @@ bool	wordle::isWin(void) const
 
 bool	wordle::isWord(std::string const &word) const
 {
-	for (unsigned int i = 0; word[i]; ++i)
-		if (!isalpha(word[i]))
-			return (false);
-	return (true);
+	if (std::find(_vectorPasswd.begin(), _vectorPasswd.end(), word)
+			!= _vectorPasswd.end())
+		return (true);
+	return (false);
 }
 
 void	wordle::chooseSecretWord(void)
@@ -177,26 +176,26 @@ void	wordle::chooseSecretWord(void)
 	infile.open(this->_wordList.c_str());
 	if (infile.is_open())
 	{
-		std::vector<std::string>	vectorPasswd;
 		std::string					word;
 
 		while (!infile.eof())
 		{
 			std::getline(infile, word);
-			if (word.length() == WORDLE_NB_LETTER && this->isWord(word))
-				vectorPasswd.push_back(word);
+			std::transform(word.begin(), word.end(), word.begin(), ::toupper);
+			if (word.length() == WORDLE_NB_LETTER)
+				this->_vectorPasswd.push_back(word);
 		}
-		std::cout << "Total words available: " << vectorPasswd.size()
+		infile.close();
+		std::cout << "Total words available: " << this->_vectorPasswd.size()
 			<< std::endl;
-		if (vectorPasswd.size() > 0)
-			passwd = vectorPasswd[rand() % vectorPasswd.size()];
+		if (this->_vectorPasswd.size() > 0)
+			passwd = this->_vectorPasswd[rand() % this->_vectorPasswd.size()];
 		else
 		{
 			std::cout << "not enough words, using default password"
 				<< std::endl;
 			passwd = WORDLE_DEFAULT_PWD;
 		}
-		infile.close();
 	}
 	else
 	{
@@ -204,6 +203,5 @@ void	wordle::chooseSecretWord(void)
 			<< ", using default password" << std::endl;
 		passwd = WORDLE_DEFAULT_PWD;
 	}
-	std::transform(passwd.begin(), passwd.end(), passwd.begin(), ::toupper);
 	this->_secretWord = passwd;
 }
