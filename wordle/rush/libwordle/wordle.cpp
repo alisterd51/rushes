@@ -6,7 +6,7 @@
 /*   By: anclarma <anclarma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 21:43:08 by anclarma          #+#    #+#             */
-/*   Updated: 2022/05/14 17:38:27 by anclarma         ###   ########.fr       */
+/*   Updated: 2022/05/14 18:15:35 by anclarma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -162,7 +162,7 @@ bool	wordle::isWin(void) const
 
 bool	wordle::isWord(std::string const &word) const
 {
-	if (std::find(_vectorPasswd.begin(), _vectorPasswd.end(), word)
+	if (word == _secretWord || std::find(_vectorPasswd.begin(), _vectorPasswd.end(), word)
 			!= _vectorPasswd.end())
 		return (true);
 	return (false);
@@ -203,5 +203,6 @@ void	wordle::chooseSecretWord(void)
 			<< ", using default password" << std::endl;
 		passwd = WORDLE_DEFAULT_PWD;
 	}
+	std::transform(passwd.begin(), passwd.end(), passwd.begin(), ::toupper);
 	this->_secretWord = passwd;
 }
