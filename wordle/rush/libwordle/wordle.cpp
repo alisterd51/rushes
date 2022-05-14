@@ -6,7 +6,7 @@
 /*   By: anclarma <anclarma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 21:43:08 by anclarma          #+#    #+#             */
-/*   Updated: 2022/05/14 10:35:49 by anclarma         ###   ########.fr       */
+/*   Updated: 2022/05/14 16:06:29 by anclarma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,19 @@
 #include <iostream>
 #include <fstream>
 #include <cctype>
+#include <cstring>
 #include <vector>
 #include "wordle.hpp"
 
 wordle::wordle(void) :
 	_index(0)
 {
+	char	buf[WORDLE_NB_LETTER + 1];
+
+	memset(buf, '_', WORDLE_NB_LETTER);
+	buf[WORDLE_NB_LETTER] = '\0';
 	for (unsigned int i = 0; i < WORDLE_NB_LINE; ++i)
-		_lines[i] = "_____";
+		_lines[i] = buf;
 	return ;
 }
 
@@ -35,8 +40,12 @@ wordle::wordle(std::string const &filename) :
 	_index(0),
 	_wordList(filename)
 {
+	char	buf[WORDLE_NB_LETTER + 1];
+
+	memset(buf, '_', WORDLE_NB_LETTER);
+	buf[WORDLE_NB_LETTER] = '\0';
 	for (unsigned int i = 0; i < WORDLE_NB_LINE; ++i)
-		_lines[i] = "_____";
+		_lines[i] = buf;
 	return ;
 }
 
