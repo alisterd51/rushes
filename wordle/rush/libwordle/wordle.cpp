@@ -6,7 +6,7 @@
 /*   By: anclarma <anclarma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 21:43:08 by anclarma          #+#    #+#             */
-/*   Updated: 2022/05/14 05:03:13 by anclarma         ###   ########.fr       */
+/*   Updated: 2022/05/14 06:32:28 by anclarma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ wordle::wordle(void) :
 	_index(0)
 {
 	for (unsigned int i = 0; i < WORDLE_NB_LINE; ++i)
-		for (unsigned int j = 0; j < WORDLE_NB_LINE; ++j)
+		for (unsigned int j = 0; j < WORDLE_NB_LETTER; ++j)
 			_lines[i][j] = '_';
 	return ;
 }
@@ -56,6 +56,7 @@ wordle	&wordle::operator=(wordle const &rhs)
 				this->_lines[i][j] = rhs._lines[i][j];
 		this->_index = rhs._index;
 		this->_secretWord = rhs._secretWord;
+		this->_wordList = rhs._wordList;
 	}
 	return (*this);
 }
@@ -82,9 +83,7 @@ void	wordle::printGrid(void) const
 		{
 			if (_lines[i][j] == toupper(_secretWord[j]))
 				std::cout << COLOR_GREEN;
-			else if (_secretWord.find(_lines[i][j]) != std::string::npos
-					|| _secretWord.find(tolower(_lines[i][j]))
-					!= std::string::npos)
+			else if (_secretWord.find(_lines[i][j]) != std::string::npos)
 				std::cout << COLOR_YELOW;
 			std::cout << _lines[i][j] << COLOR_RESET;
 			if (j + 1 < WORDLE_NB_LETTER)
@@ -100,8 +99,21 @@ void	wordle::getAttemp(void)
 
 	std::cout << "input: ";
 	std::getline(std::cin, word);
-	if (word.size() <= WORDLE_NB_LETTER)
+	std::transform(word.begin(), word.end(), word.begin(), ::toupper);
+	if (word.size() == 0)
+		std::cout << "empty word" << std::endl;
+	else if (word.size() <= WORDLE_NB_LETTER)
+	{
+		for (unsigned int i = 0; word[i]; ++i)
+		{
+			if (!isalpha(word[i]))
+			{
+				std::cout << "contains non-alphabetic characters" << std::endl;
+				return ;
+			}
+		}
 		this->attempt(word);
+	}
 	else
 		std::cout << "your input is longer than " << WORDLE_NB_LETTER
 			<< " letter" << std::endl;
@@ -110,9 +122,7 @@ void	wordle::getAttemp(void)
 void	wordle::attempt(std::string const &word)
 {
 	for (unsigned int i = 0; word[i]; ++i)
-	{
-		_lines[_index][i] = toupper(word[i]);
-	}
+		_lines[_index][i] = word[i];
 	++this->_index;
 }
 
