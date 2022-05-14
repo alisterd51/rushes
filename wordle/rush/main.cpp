@@ -6,7 +6,7 @@
 /*   By: anclarma <anclarma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 21:42:40 by anclarma          #+#    #+#             */
-/*   Updated: 2022/05/14 00:13:36 by anclarma         ###   ########.fr       */
+/*   Updated: 2022/05/14 02:44:02 by anclarma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,8 @@
 
 int	main(void)
 {
-	wordle	w;
+	wordle	w("azert");
 
-	w.printTitle();
-	w.printGrid();
+	w.game();
 	return (0);
 }
