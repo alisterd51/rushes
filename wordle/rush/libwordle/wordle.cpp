@@ -6,7 +6,7 @@
 /*   By: anclarma <anclarma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 21:43:08 by anclarma          #+#    #+#             */
-/*   Updated: 2022/05/15 17:40:41 by antoine          ###   ########.fr       */
+/*   Updated: 2022/05/15 20:28:44 by anclarma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,7 +135,8 @@ void	wordle::attempt(std::string const &word)
 bool	wordle::game(void)
 {
 	this->printTitle();
-	this->chooseSecretWord();
+	if (!this->chooseSecretWord())
+		return (2);
 	this->printGrid();
 	while (this->_index < WORDLE_NB_LINE)
 	{
@@ -177,10 +178,19 @@ bool	wordle::isWord(std::string const &word) const
 	return (false);
 }
 
-void	wordle::chooseSecretWord(void)
+bool	wordle::isValidWord(std::string const &word) const
+{
+	if (word.length() != WORDLE_NB_LETTER)
+		return (false);
+	for (unsigned int i = 0; i < WORDLE_NB_LETTER; ++i)
+		if (!isalpha(word[i]))
+			return (false);
+	return (true);
+}
+
+bool	wordle::chooseSecretWord(void)
 {
 	std::ifstream	infile;
-	std::string		passwd;
 
 	infile.open(this->_wordList.c_str());
 	if (infile.is_open())
@@ -191,27 +201,26 @@ void	wordle::chooseSecretWord(void)
 		{
 			std::getline(infile, word);
 			std::transform(word.begin(), word.end(), word.begin(), ::toupper);
-			if (word.length() == WORDLE_NB_LETTER)
+			if (this->isValidWord(word))
 				this->_vectorPasswd.push_back(word);
 		}
 		infile.close();
 		std::cout << "Total words available: " << this->_vectorPasswd.size()
 			<< std::endl;
 		if (this->_vectorPasswd.size() > 0)
-			passwd = this->_vectorPasswd[rand() % this->_vectorPasswd.size()];
+			this->_secretWord = this->_vectorPasswd[rand() % this->_vectorPasswd.size()];
 		else
 		{
-			std::cout << "not enough words, using default password"
+			std::cout << "not enough words, please enter a valid dictionary"
 				<< std::endl;
-			passwd = WORDLE_DEFAULT_PWD;
+			return (false);
 		}
 	}
 	else
 	{
-		std::cout << "Failed to open file " << _wordList
-			<< ", using default password" << std::endl;
-		passwd = WORDLE_DEFAULT_PWD;
+			std::cout << "Failed to open file " << _wordList
+				<< ", please enter a valid dictionary" << std::endl;
+			return (false);
 	}
-	std::transform(passwd.begin(), passwd.end(), passwd.begin(), ::toupper);
-	this->_secretWord = passwd;
+	return (true);
 }
