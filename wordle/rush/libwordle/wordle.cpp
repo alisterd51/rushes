@@ -6,7 +6,7 @@
 /*   By: anclarma <anclarma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 21:43:08 by anclarma          #+#    #+#             */
-/*   Updated: 2022/05/15 20:28:44 by anclarma         ###   ########.fr       */
+/*   Updated: 2022/05/15 22:24:37 by anclarma         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include <cctype>
 #include <cstring>
 #include <vector>
+#include <string>
 #include "wordle.hpp"
 
 wordle::wordle(void) :
@@ -136,7 +137,7 @@ bool	wordle::game(void)
 {
 	this->printTitle();
 	if (!this->chooseSecretWord())
-		return (2);
+		return (false);
 	this->printGrid();
 	while (this->_index < WORDLE_NB_LINE)
 	{

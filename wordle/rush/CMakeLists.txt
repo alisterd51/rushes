@@ -6,7 +6,7 @@
 #    By: anclarma <anclarma@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/13 21:31:26 by anclarma          #+#    #+#              #
-#    Updated: 2022/05/13 23:31:32 by anclarma         ###   ########.fr        #
+#    Updated: 2022/05/15 22:28:29 by anclarma         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,5 +29,6 @@ set(SRCS
 	)
 
 add_executable(main ${SRCS})
+configure_file(words.txt words.txt COPYONLY)
 
 target_link_libraries(main wordle)
