@@ -6,7 +6,7 @@
 /*   By: anclarma <anclarma@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/13 21:43:08 by anclarma          #+#    #+#             */
-/*   Updated: 2022/05/14 18:15:35 by anclarma         ###   ########.fr       */
+/*   Updated: 2022/05/15 17:40:41 by antoine          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,10 @@
 #include "wordle.hpp"
 
 wordle::wordle(void) :
-	_index(0)
+	_index(0),
+	_secretWord(),
+	_wordList(),
+	_vectorPasswd()
 {
 	char	buf[WORDLE_NB_LETTER + 1];
 
@@ -30,7 +33,11 @@ wordle::wordle(void) :
 	return ;
 }
 
-wordle::wordle(wordle const &src)
+wordle::wordle(wordle const &src) :
+	_index(),
+	_secretWord(),
+	_wordList(),
+	_vectorPasswd()
 {
 	*this = src;
 	return ;
@@ -38,7 +45,9 @@ wordle::wordle(wordle const &src)
 
 wordle::wordle(std::string const &filename) :
 	_index(0),
-	_wordList(filename)
+	_secretWord(),
+	_wordList(filename),
+	_vectorPasswd()
 {
 	char	buf[WORDLE_NB_LETTER + 1];
 
